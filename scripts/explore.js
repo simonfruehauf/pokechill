@@ -1430,7 +1430,7 @@ for (let i = activeBars - 1; i >= 0; i--) {
     bar.style.width = "0%";
 
 
-
+    if (areas[saved.currentArea]?.skills != undefined){
     if (bar == document.getElementById("exploe-wild-hp-4") && skillEnemyTriggers[1] == false) {
     if (areas[saved.currentArea]?.skills[1] != undefined) skill[areas[saved.currentArea].skills[1]].effect()
     skillEnemyTriggers[1] = true
@@ -1446,6 +1446,8 @@ for (let i = activeBars - 1; i >= 0; i--) {
     if (areas[saved.currentArea]?.skills[3] != undefined) skill[areas[saved.currentArea].skills[3]].effect()
     skillEnemyTriggers[3] = true
     }
+    } 
+
 
 
 
