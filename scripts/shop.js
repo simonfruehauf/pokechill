@@ -1668,6 +1668,19 @@ function updateItemShop(){
     } else document.getElementById("shop-apricorn-exchange").style.filter = "brightness(1)"
 
 
+    if (areas.vsLegendTrainerBrendan.defeated== false){
+        document.getElementById("shop-restaurant").style.filter = "brightness(0.3)"
+        if (shopCategory == "restaurant") {
+        document.getElementById("tooltipTop").style.display = `none`
+        document.getElementById("tooltipTitle").style.display = `none`
+        document.getElementById("tooltipBottom").style.display = `none`
+        document.getElementById("tooltipMid").innerHTML = `Defeat Legend Trainer Brendan in VS mode to unlock`
+        openTooltip()
+        return
+        }
+    } else document.getElementById("shop-restaurant").style.filter = "brightness(1)"
+
+
     assignShopApricorn()
     assignShopDecor()
 
