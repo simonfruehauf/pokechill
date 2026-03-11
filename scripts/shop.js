@@ -2085,7 +2085,6 @@ function updateCurry(){
         document.getElementById(`curry-ingredients`).appendChild(ingr)
 
         const effect = document.createElement(`div`)
-        console.log(i, ingredient[i])
         effect.innerHTML = format(ingredient[i].ability)
         document.getElementById(`curry-effects`).appendChild(effect)
 
@@ -2140,6 +2139,7 @@ function makeCurry(){
         document.getElementById("tooltipBottom").style.display = `none`
         document.getElementById("tooltipMid").innerHTML = `You can't afford this`
         openTooltip()
+        return
     }
 
     saved.curry = {
@@ -2163,6 +2163,8 @@ function makeCurry(){
         document.getElementById("tooltipMid").innerHTML = `During raids: Temporarily gained the next abilities for everyone in your team:`
         document.getElementById("tooltipBottom").innerHTML = joinWithAnd(curryAbilities)
         openTooltip()
+        item.goldenBottleCap.got -= totalPrice
+            document.getElementById("shop-currency-gold").innerHTML = `<img src="img/items/goldenBottleCap.png"> x${item.goldenBottleCap.got}`
         saved.lastCurryRotation = rotationWildCurrent
         curryIngredientList = []
         updateCurry()
