@@ -361,7 +361,7 @@ const areas = {}
 //area 4 rs = pseudo-legendary
 
 
-const rotationWildMax = 12;
+const rotationWildMax = 13;
 
 const wildAreaLevel1 = 10
 const wildAreaLevel2 = 30
@@ -1254,6 +1254,84 @@ areas.relicPassage = {
         rare : wildRareItemsGhost
     }
 }
+
+
+areas.mythicalSafari = {
+    rotation : 13,
+    level : wildAreaLevel1,
+    type: `wild`,
+    background : `forest`,
+    unlockDescription : `Defeat Pokemon Professor Oak in VS to unlock`,
+    unlockRequirement : function() { return areas.vsPokemonProfessorOak?.defeated },
+    icon: pkmn.celebi,
+    spawns: {
+        common : [pkmn.missingno, pkmn.victini, pkmn.hoopa],
+        uncommon : [pkmn.volcanion],
+        rare : [pkmn.celebi]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsGrass
+    }
+}
+
+areas.forbiddenIsle = {
+    rotation : 13,
+    level : wildAreaLevel2,
+    type: `wild`,
+    background : `sea`,
+    unlockDescription : `Defeat Pokemon Professor Oak in VS to unlock`,
+    unlockRequirement : function() { return areas.vsPokemonProfessorOak?.defeated },
+    icon: pkmn.darkrai,
+    spawns: {
+        common : [pkmn.seadra, pkmn.mantine, pkmn.wailord],
+        uncommon : [pkmn.zeraora],
+        rare : [pkmn.darkrai]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsDark
+    }
+}
+
+areas.areaZeroDepths = {
+    rotation : 13,
+    level : wildAreaLevel3,
+    type: `wild`,
+    background : `space`,
+    unlockDescription : `Defeat Pokemon Professor Oak in VS to unlock`,
+    unlockRequirement : function() { return areas.vsPokemonProfessorOak?.defeated },
+    icon: pkmn.terapagos,
+    spawns: {
+        common : [pkmn.glimmora, pkmn.revavroom, pkmn.garganacl],
+        uncommon : [pkmn.ironLeaves],
+        rare : [pkmn.walkingWake]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsDragon
+    }
+}
+
+areas.ancientRuins = {
+    rotation : 13,
+    level : wildAreaLevel4,
+    type: `wild`,
+    background : `cave`,
+    unlockDescription : `Defeat Pokemon Professor Oak in VS to unlock`,
+    unlockRequirement : function() { return areas.vsPokemonProfessorOak?.defeated },
+    icon: pkmn.genesect,
+    spawns: {
+        common : [pkmn.golurk, pkmn.sigilyph, pkmn.claydol],
+        uncommon : [pkmn.arceus],
+        rare : [pkmn.genesect]
+    },
+    drops: {
+        common : [item.mysteryEgg],
+        rare : wildRareItemsSteel
+    }
+}
+
 
 
 
@@ -6421,4 +6499,4 @@ for (const i in areas){
 
 
 
-
+
