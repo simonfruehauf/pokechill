@@ -672,7 +672,7 @@ guide.evolution = {
 
 guide.pokerus = {
   name: `Pokerus`,
-  description: function() { return `Every 12 hours, some of your Pokemon will randomly contract Pokerus. Don't worry — this virus is entirely beneficial!<br><br>Pokemon with Pokerus receive an extra level of Genetic Compatibility when used as a host in Genetics operations. This makes them better candidates for IV inheritance and other genetic modifications<br><br>Pokerus is indicated on the Pokemon and can help turn otherwise low-compatibility pairings into viable genetic operations` }
+  description: function() { return `Every 12 hours, some of your Pokemon will randomly contract Pokerus. Don't worry — this virus is entirely beneficial! The number of infected Pokemon scales with the size of your collection (roughly 1 per 100 Pokemon)<br><br>Pokerus provides the following bonuses:<br><br><strong>Genetics Compatibility</strong><br>Pokemon with Pokerus receive an extra level of Genetic Compatibility when used as a host in Genetics operations. This makes them better candidates for IV inheritance and other genetic modifications<br><br><strong>EXP Boost</strong><br>Infected Pokemon in your team earn 50% more experience from battles. This stacks with the Lucky Egg item, making Pokerus Pokemon ideal for leveling<br><br><strong>Faster Genetics</strong><br>When the host Pokemon has Pokerus, the genetics operation time is reduced by 20%, speeding up your genetic modifications<br><br><strong>Shiny Luck</strong><br>Each infected team member increases shiny encounter rates by 10%. Stack multiple infected Pokemon in your team for an even bigger boost!<br><br>Pokerus resets every rotation, so make the most of your infected Pokemon while they have it!` }
 }
 
 guide.megaDimension = {

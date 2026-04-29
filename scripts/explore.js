@@ -1028,6 +1028,7 @@ function leaveCombat(){
         if (team[slot].item == item.shinyCharm.id) shinyPkmnChanceEncounter *= (item.shinyCharm.power() /100) +1
         if (testAbility(slot, ability.goodAsGold.id) ) shinyPkmnChance *= 1.15
         if (testAbility(slot, ability.goodAsGold.id) ) shinyPkmnChanceEncounter *= 1.15
+        if (pkmn[team[slot].pkmn.id].pokerus) { shinyPkmnChance *= 1.10; shinyPkmnChanceEncounter *= 1.10 }
     }
 
     if (saved.hasTeatimeBeenUsed == true){
@@ -1564,6 +1565,7 @@ for (let i = activeBars; i < hpBars.length; i++) {
 
 
     if (team[exploreActiveMember].item==="luckyEgg") expGained *= (item.luckyEgg.power() /100) +1
+    if (pkmn[ team[exploreActiveMember].pkmn.id ].pokerus) expGained *= 1.5
     pkmn[ team[exploreActiveMember].pkmn.id ].exp += expGained
 
     for (const i in team) {
@@ -1582,6 +1584,7 @@ for (let i = activeBars; i < hpBars.length; i++) {
     if ( pkmn[ team[i].pkmn.id ].level == 100) expGained = 0
 
     if (team[i].item==="luckyEgg") expGained *= (item.luckyEgg.power() /100) +1
+    if (pkmn[ team[i].pkmn.id ].pokerus) expGained *= 1.5
 
     pkmn[ team[i].pkmn.id ].exp+= expGained/2
 
@@ -8612,6 +8615,7 @@ else {document.getElementById("genetics-bar-power").style.backgroundColor = `rgb
 
 let timeNeeded = ( 10 * powerCost ) *60
 if (item.replicatorUpgradeS.got>0) { timeNeeded = Math.max(10, ( 10 * powerCost )-30 ) *60 }
+if (pkmn[saved.geneticHost]?.pokerus || saved.geneticPokerus==true) { timeNeeded = Math.floor(timeNeeded * 0.8) }
 const [h, m, x] = [
   (timeNeeded / 3600) | 0,
   ((timeNeeded % 3600) / 60) | 0,
