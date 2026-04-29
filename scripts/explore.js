@@ -4881,6 +4881,13 @@ document.getElementById("explore-pkmn-tag").addEventListener("change", e => {
   updatePokedex()
 });
 
+let pokedexTotalShowShiny = false;
+
+document.getElementById("pokedex-total").addEventListener("click", e => {
+    pokedexTotalShowShiny = !pokedexTotalShowShiny;
+    updatePokedex();
+});
+
 document.getElementById("pokedex-filter-tag").addEventListener("change", e => {
   updatePokedex()
 });
@@ -5175,6 +5182,7 @@ function updatePokedex(){
 
     let totalPokemon = 0
     let gotPokemon = 0
+    let gotShinyPokemon = 0
     let sortedPokemon = []
 
 
@@ -5273,6 +5281,7 @@ function updatePokedex(){
         if (areas[saved.currentAreaBuffer]?.type=="frontier" && rotationFrontierCurrent===3 && (returnPkmnDivision(pkmn[i])!="A" && returnPkmnDivision(pkmn[i])!="B" && returnPkmnDivision(pkmn[i])!="C" &&  returnPkmnDivision(pkmn[i])!="D")) continue
 
         gotPokemon++
+        if (pkmn[i].shiny) gotShinyPokemon++
         sortedPokemon.push(pkmn[i])
     }
 
@@ -5827,10 +5836,23 @@ if (document.getElementById("pokedex-search").value!="") {
     }
 
 
-    document.getElementById(`pokedex-total`).innerHTML = `Caught: ${gotPokemon}/${totalPokemon}`
-    if (gotPokemon == totalPokemon) {document.getElementById(`pokedex-total`).style.background = "rgba(187, 146, 85, 1)";     document.getElementById(`pokedex-total`).innerHTML = `Caught: ${gotPokemon}/${totalPokemon} <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><defs><mask id="SVGIz3eBe9X"><g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="M8 44h8m-4 0V4"/><path fill="#555555" d="M40 6H12v16h28l-4-8z"/></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGIz3eBe9X)"/></svg>`
-}
-    else document.getElementById(`pokedex-total`).style.background = "rgba(91, 114, 163, 1)"
+    if (pokedexTotalShowShiny) {
+        document.getElementById(`pokedex-total`).innerHTML = `Shiny: ${gotShinyPokemon}/${totalPokemon}`
+        if (gotShinyPokemon == totalPokemon) {
+            document.getElementById(`pokedex-total`).style.background = "rgba(187, 146, 85, 1)";
+            document.getElementById(`pokedex-total`).innerHTML = `Shiny: ${gotShinyPokemon}/${totalPokemon} <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><defs><mask id="SVGIz3eBe9X"><g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="M8 44h8m-4 0V4"/><path fill="#555555" d="M40 6H12v16h28l-4-8z"/></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGIz3eBe9X)"/></svg>`
+        } else {
+            document.getElementById(`pokedex-total`).style.background = "rgba(91, 114, 163, 1)"
+        }
+    } else {
+        document.getElementById(`pokedex-total`).innerHTML = `Caught: ${gotPokemon}/${totalPokemon}`
+        if (gotPokemon == totalPokemon) {
+            document.getElementById(`pokedex-total`).style.background = "rgba(187, 146, 85, 1)";
+            document.getElementById(`pokedex-total`).innerHTML = `Caught: ${gotPokemon}/${totalPokemon} <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><defs><mask id="SVGIz3eBe9X"><g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="M8 44h8m-4 0V4"/><path fill="#555555" d="M40 6H12v16h28l-4-8z"/></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#SVGIz3eBe9X)"/></svg>`
+        } else {
+            document.getElementById(`pokedex-total`).style.background = "rgba(91, 114, 163, 1)"
+        }
+    }
 
     document.getElementById(`pokedex-total`).style.display = "flex"
     if (document.getElementById(`pokedex-filter-level`).value !== "all") document.getElementById(`pokedex-total`).style.display = "none"

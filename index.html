@@ -167,8 +167,18 @@
                         onclick='dictionaryFilter="item"; document.getElementById("dictionary-search").value=""; searchedDictionary = [] ;  updateDictionary() '>
                         Items</div>
                 </div>
-                <div style="width: 100%;" data-help="searchDictionary"><input style="cursor: help;"
-                        id="dictionary-search" type="text" placeholder="Right Click/Long Press to see keywords"></div>
+                <div style="width: 100%; display: flex; align-items: center; gap: 0.5rem;" data-help="searchDictionary">
+                    <input style="cursor: help; flex-grow: 1;" id="dictionary-search" type="text"
+                        placeholder="Right Click/Long Press to see keywords">
+                    <svg onclick="tooltipData('help', 'searchDictionary')"
+                        style="cursor: pointer; color: var(--light2); flex-shrink: 0;"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </div>
             </div>
             <div id="dictionary-list">
             </div>
@@ -341,10 +351,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="pokedex-search" data-help="searchPokedex">
-                    <input style="cursor: help;" id="pokedex-search" type="text"
+                <div class="pokedex-search" data-help="searchPokedex"
+                    style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input style="cursor: help; flex-grow: 1;" id="pokedex-search" type="text"
                         placeholder="Right Click to see keywords">
-                    <div style="background: rgb(90, 133, 113); color: white; cursor: default;" id="pokedex-total">caught
+                    <svg onclick="tooltipData('help', 'searchPokedex')"
+                        style="cursor: pointer; color: var(--light2); flex-shrink: 0;"
+                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <div style="background: rgb(90, 133, 113); color: white; cursor: pointer;" id="pokedex-total">caught
                     </div>
                 </div>
             </div>
@@ -379,7 +398,7 @@
                         <option value="false">disabled</option>
                         <option value="true">enabled</option>
                     </select></div>
-                <div data-help="settingsAlternateWild" style="cursor: help;">Sustract 1 to current Wild Area rotation:
+                <div data-help="settingsAlternateWild" style="cursor: help;">Subtract 1 to current Wild Area rotation:
                     <select id="settings-alternate-rotation">
                         <option value="false">disabled</option>
                         <option value="true">enabled</option>
@@ -397,9 +416,9 @@
                 <div onclick='document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").innerHTML = `Credits`
         document.getElementById("tooltipMid").style.display = `none`
-        document.getElementById("tooltipBottom").innerHTML = `Made by <span onclick="secretFight(areas.missingArea.id)">Duck</span><br><br>Pokemon and trainer sprites by Pokemon Showdown (Including artists: Beliot419, kyledove, Gnomowladny, Brumirage and ZacWeavile. Go check their work. Now.)<br><br>Gen 9 sprites by KingOfThe-X-Roads<br><br>All characters and related assets featured in this game are the exclusive property of Nintendo, Creatures Inc., and The Pokémon Company, and are used here strictly for non-commercial purposes.`
+        document.getElementById("tooltipBottom").innerHTML = `Made by <span onclick="secretFight(areas.missingArea.id)">Duck</span> <br>Revised by Bee <br><br>Pokemon and trainer sprites by Pokemon Showdown (Including artists: Beliot419, kyledove, Gnomowladny, Brumirage and ZacWeavile. Go check their work. Now.)<br><br>Gen 9 sprites by KingOfThe-X-Roads<br><br>All characters and related assets featured in this game are the exclusive property of Nintendo, Creatures Inc., and The Pokémon Company, and are used here strictly for non-commercial purposes.`
         openTooltip()'>Credits</div>
-                <div onclick="window.open('https://discord.gg/VnukKfSs3S', '_blank')">Discord</div>
+
                 <div style="margin-top: 3rem;background: rgb(206, 83, 83); color: white; " onclick='document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").innerHTML = `Are you sure you want to delete all data forever?`
         document.getElementById("tooltipMid").style.display = `none`
