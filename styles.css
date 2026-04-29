@@ -1805,13 +1805,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .explore-ticket:hover{
-    margin: 0.5rem 0;
+    scale: 0.99;
     box-shadow: rgba(0, 0, 0, 0.4) 5px 5px 5px 0;
 }
 
 .explore-ticket:hover .explore-ticket-sprite{
     animation: pkmn-active 0.5s infinite;
-
 }
 
 
