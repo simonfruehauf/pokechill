@@ -630,6 +630,66 @@ guide.powerCost = {
   description: function() { return `Power cost determines how taxing it is to modify the host. This influences the time to complete the operation<br><br>This is determined by the division of the host. A higher division will exponentially increase the time required to modify the Pokemon`}
 }
 
+guide.divisions = {
+  name: `Divisions`,
+  description: function() { return `Every Pokemon is assigned a Division letter based on their base stat total. Divisions provide a quick way to gauge a Pokemon's overall power level<br><br>The divisions from weakest to strongest are: D, C, B, A, S, SS, and SSS<br><br>Divisions affect several game mechanics:<br>• Training difficulty and matchups scale with your Pokemon's division<br>• The Battle Frontier has league restrictions based on division (Little Cup: C and below, Great League: B and below, etc.)<br>• Genetics power cost increases with higher divisions, meaning stronger Pokemon take longer to modify<br><br>While higher-division Pokemon tend to be stronger, clever team building with abilities, moves, and items can make lower-division Pokemon punch above their weight` }
+}
+
+guide.wildAreas = {
+  name: `Wild Areas & Rotations`,
+  description: function() { return `Wild Areas are your primary source of new Pokemon. All Pokemon encountered in Wild Areas can be caught by defeating them<br><br>Wild Areas rotate every day, so be sure to check what's available! Each area has a level range and a set of common, uncommon, and rare spawns<br><br>You can right click/long press on an area before entering to preview which Pokemon and items can be found there<br><br>The Alternate Rotation setting in Settings allows you to subtract 1 from the current rotation, useful if you missed yesterday's pool` }
+}
+
+guide.dungeons = {
+  name: `Dungeons`,
+  description: function() { return `Unlike Wild Areas, Pokemon in Dungeons cannot be caught. Instead, Dungeons are valuable for farming items and gaining experience<br><br>Dungeons rotate daily alongside Wild Areas. Each dungeon has its own pool of item drops, including rare finds<br><br>Dungeons are a great way to level up your team and gather resources for the Shop, Evolution, and Genetics` }
+}
+
+guide.vsTrainers = {
+  name: `VS Trainers`,
+  description: function() { return `VS Trainers is your main progression path. Defeat increasingly difficult trainers to earn Bottle Caps and unlock new content<br><br>You can right click/long press on a trainer to preview their team and any victory rewards before committing to a fight<br><br>Progressing through VS Trainers may unlock additional Wild Areas and features. Some trainers have field effects that modify the battle rules, so plan your team accordingly` }
+}
+
+guide.battleFrontier = {
+  name: `Battle Frontier`,
+  description: function() { return `The Battle Frontier houses multiple challenge modes with division restrictions that rotate every three days:<br><br>• Battle Tower: An infinitely-scaling challenge where each defeated Pokemon increases the difficulty. Your highest floor is saved per rotation. Type immunities are converted to resistances here<br><br>• Battle Factory: Deal the maximum amount of damage! You take fixed damage each turn, and status damage is disabled. Your highest score is saved per rotation<br><br>• Battle Arena: Face five trainers with selectable difficulty tiers (Level 100/125/150). Randomised field effects make each attempt unique. Higher difficulty yields more Golden Bottle Caps<br><br>Frontier trainers reset daily, so you can retry as often as you like. Each mode can award up to 100 Golden Bottle Caps per rotation` }
+}
+
+guide.trainingGuide = {
+  name: `Training`,
+  description: function() { return `Training allows you to improve specific aspects of your Pokemon through structured challenges:<br><br>• IV Training (★): Increase your Pokemon's Individual Values by battling waves of foes<br>• EXP Training (★★★): Gain experience faster against level-scaled opponents<br>• Signature Move Training (★★★★): Attempt to teach your Pokemon its unique signature move<br>• Ability Training (★★): Re-roll your Pokemon's ability for a potentially better one<br>• Hidden Ability Training (★★★★): Unlock your Pokemon's Hidden Ability<br><br>During training, you'll have a natural type advantage and opponents scale to your level. Type immunities are converted to resistances. Failing a training session will result in no gains` }
+}
+
+guide.itemsCurrency = {
+  name: `Items & Currencies`,
+  description: function() { return `There are two main currencies in the game:<br><br>• Bottle Caps: The standard currency earned from VS Trainers, used to buy most items in the Poke-Mart<br>• Golden Bottle Caps: A premium currency earned from the Battle Frontier and Arena, used for high-end purchases like TMs, Curry ingredients, and special items<br><br>Items are divided into several categories:<br>• Held Items: Equip on Pokemon for passive bonuses in battle<br>• Evolution Items: Stones and special items to evolve certain Pokemon<br>• TMs: Teach specific moves to compatible Pokemon<br>• Berries & Gems: Various consumable effects<br>• Key Items: Special progression items like the Auto-Refight Ticket<br><br>You can manage your items from the Items menu, and purchase new ones from the Poke-Mart` }
+}
+
+guide.evolution = {
+  name: `Evolution`,
+  description: function() { return `Pokemon can evolve in two main ways:<br><br>• Level Evolution: Many Pokemon evolve automatically when they reach a certain level<br>• Item Evolution: Some Pokemon require specific items (such as elemental stones or trade items) to evolve. These items can be purchased from the Poke-Mart or found as dungeon drops<br><br>When a Pokemon evolves, it gains new base stats and potentially new typings. Moves are retained through evolution<br><br>Important: Shiny status does not carry over through evolution. To get a shiny evolved form, you must use Genetics to pass the shiny mutation to an already-evolved Pokemon` }
+}
+
+guide.pokerus = {
+  name: `Pokerus`,
+  description: function() { return `Every 12 hours, some of your Pokemon will randomly contract Pokerus. Don't worry — this virus is entirely beneficial!<br><br>Pokemon with Pokerus receive an extra level of Genetic Compatibility when used as a host in Genetics operations. This makes them better candidates for IV inheritance and other genetic modifications<br><br>Pokerus is indicated on the Pokemon and can help turn otherwise low-compatibility pairings into viable genetic operations` }
+}
+
+guide.megaDimension = {
+  name: `Mega Dimension`,
+  description: function() { return `The Mega Dimension is the endgame challenge, housing only the most powerful Pokemon in the universe<br><br>Wormholes appear with unique rules, including:<br>• Unique field effects that modify battle mechanics<br>• Skills that trigger at specific HP thresholds during the fight<br>• Randomised boss Pokemon that change each rotation<br><br>These encounters are significantly harder than anything else in the game and are designed for fully optimised teams with strong IVs, abilities, and move coverage<br><br>Prepare thoroughly before entering a wormhole — right click/long press to preview the encounter rules` }
+}
+
+guide.events = {
+  name: `Events`,
+  description: function() { return `Events are special rotating areas that appear every three days, containing both collectible Pokemon and items<br><br>Events are split into tiers:<br>• Standard events: Catch unique Pokemon and gather items<br>• Boss events (marked with a skull): Powerful foes that usually require a special item to catch. The item won't be consumed if you fail to defeat the boss<br><br>Boss encounter items like Apricorns can be acquired from collection-tier events. Higher difficulty tiers may drop rarer Apricorn colours<br><br>Keep an eye on the rotation — event Pokemon may not be available through any other means!` }
+}
+
+guide.curry = {
+  name: `Curry`,
+  description: function() { return `Every 12 hours, you can cook a Curry at the Poke-Mart's Restaurant section. Curry provides temporary team-wide abilities during raids for 1 hour<br><br>How it works:<br>• Select up to 5 ingredients to add to the curry pot<br>• Different ingredient combinations produce different ability effects<br>• Pay the Golden Bottle Cap cost to cook<br><br>The abilities gained follow the same rules as regular abilities, and will not stack with already existing ones on your Pokemon<br><br>Curry is a powerful tool for tackling difficult content like the Mega Dimension or challenging VS Trainers` }
+}
+
 function setGuide(){
 
   for (const i in guide){
