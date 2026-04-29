@@ -339,6 +339,9 @@ function changeTheme(){
 
 
 //--Automatically trims all images with specified class. Used for all Pokemon sprites
+//--Sprite trim cache: stores trimmed data URLs keyed by original source URL
+const spriteTrimCache = new Map();
+
 async function trimTransparent(img) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
@@ -385,7 +388,14 @@ async function processSprite(img) {
   // Prevents unnecesary trimming
   if (img.dataset.lastSrc === img.src) return;
 
-  img.dataset.lastSrc = img.src;
+  const originalSrc = img.src;
+  img.dataset.lastSrc = originalSrc;
+
+  // Serve from cache if this sprite URL was already trimmed
+  if (spriteTrimCache.has(originalSrc)) {
+    img.src = spriteTrimCache.get(originalSrc);
+    return;
+  }
 
   if (!img.complete) {
     await new Promise(resolve => img.onload = resolve);
@@ -393,6 +403,7 @@ async function processSprite(img) {
 
   try {
     const result = await trimTransparent(img);
+    spriteTrimCache.set(originalSrc, result);
     img.src = result;
   } catch (e) {
     console.error("Error trimming sprite:", e);
