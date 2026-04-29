@@ -4921,6 +4921,10 @@ document.getElementById("pokedex-filter-evolution").addEventListener("change", e
   updatePokedex()
 });
 
+document.getElementById("pokedex-filter-mega").addEventListener("change", e => {
+  updatePokedex()
+});
+
 function resetPokedexFilters(){
     tagSystemTagSearch = []
 
@@ -4936,6 +4940,7 @@ function resetPokedexFilters(){
     document.getElementById("pokedex-filter-shiny").value = "all";
     document.getElementById("pokedex-filter-signature").value = "all";
     document.getElementById("pokedex-filter-ribbon").value = "all";
+    document.getElementById("pokedex-filter-mega").value = "all";
 }
 
 
@@ -5163,6 +5168,11 @@ function updatePokedex(){
         document.getElementById("pokedex-filters-title").innerHTML = `Select a sample Pokemon`
     }
 
+    const pkmnKeyMap = new Map();
+    for (const key in pkmn) {
+        pkmnKeyMap.set(pkmn[key], key);
+    }
+
     let totalPokemon = 0
     let gotPokemon = 0
     let sortedPokemon = []
@@ -5228,6 +5238,28 @@ function updatePokedex(){
         if (document.getElementById(`pokedex-filter-evolution`).value !== "all" && !missingEvolution  ) continue
 
         if (document.getElementById(`pokedex-filter-evolution`).value == "level-only" && !missingLevelEvolution  ) continue
+
+        if (document.getElementById(`pokedex-filter-mega`).value !== "all") {
+            let hasMega = false;
+            if (typeof pkmn[i].evolve === 'function') {
+                const evos = pkmn[i].evolve();
+                for (const k in evos) {
+                    const evo = evos[k];
+                    if (evo && evo.pkmn) {
+                        const evoKey = pkmnKeyMap.get(evo.pkmn);
+                        if (evoKey && evoKey.toLowerCase().startsWith('mega')) {
+                            hasMega = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            const filterValue = document.getElementById(`pokedex-filter-mega`).value;
+            if (filterValue === "true" && !hasMega) continue;
+            if (filterValue === "false" && hasMega) continue;
+            if (filterValue === "is-mega" && !(i.startsWith('mega') && i.length > 4 && i[4] === i[4].toUpperCase())) continue;
+        }
 
 
         if (pkmn[i].caught==0 && pkmn[i].tagObtainedIn == "unobtainable") continue
