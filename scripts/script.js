@@ -71,73 +71,19 @@ function updateGameVersion() {
   if (saved.version<1.6){
   //moved to a new team format
   saved.previewTeams = {}
-  saved.previewTeams.preview1 = {}
-  saved.previewTeams.preview2 = {}
-  saved.previewTeams.preview3 = {}
-  saved.previewTeams.preview4 = {}
-  saved.previewTeams.preview5 = {}
-  saved.previewTeams.preview6 = {}
-  saved.previewTeams.preview7 = {}
-  saved.previewTeams.preview8 = {}
-  saved.previewTeams.preview9 = {}
-  saved.previewTeams.preview10 = {}
-  saved.previewTeams.preview11 = {}
-  saved.previewTeams.preview12 = {}
-  saved.previewTeams.preview13 = {}
-  saved.previewTeams.preview14 = {}
-  saved.previewTeams.preview15 = {}
-  saved.previewTeams.preview16 = {}
-  saved.previewTeams.preview17 = {}
-  saved.previewTeams.preview18 = {}
-  saved.previewTeams.preview19 = {}
-  saved.previewTeams.preview20 = {}
-  saved.previewTeams.preview21 = {}
-  saved.previewTeams.preview22 = {}
-  saved.previewTeams.preview23 = {}
-  saved.previewTeams.preview24 = {}
-  saved.previewTeams.preview25 = {}
-  saved.previewTeams.preview26 = {}
-  saved.previewTeams.preview27 = {}
-  saved.previewTeams.preview28 = {}
-  saved.previewTeams.preview29 = {}
-  saved.previewTeams.preview30 = {}
-
-  for (const i in saved.previewTeams) {
-    saved.previewTeams[i].slot1 = { } 
-    saved.previewTeams[i].slot2 = { } 
-    saved.previewTeams[i].slot3 = { } 
-    saved.previewTeams[i].slot4 = { } 
-    saved.previewTeams[i].slot5 = { } 
-    saved.previewTeams[i].slot6 = { } 
-
-    saved.previewTeams[i].slot1.item = undefined
-    saved.previewTeams[i].slot2.item = undefined
-    saved.previewTeams[i].slot3.item = undefined
-    saved.previewTeams[i].slot4.item = undefined
-    saved.previewTeams[i].slot5.item = undefined
-    saved.previewTeams[i].slot6.item = undefined
-
-    saved.previewTeams[i].slot1.pkmn = undefined
-    saved.previewTeams[i].slot2.pkmn = undefined
-    saved.previewTeams[i].slot3.pkmn = undefined
-    saved.previewTeams[i].slot4.pkmn = undefined
-    saved.previewTeams[i].slot5.pkmn = undefined
-    saved.previewTeams[i].slot6.pkmn = undefined
+  for (let n = 1; n <= 30; n++) {
+    const key = `preview${n}`;
+    saved.previewTeams[key] = {};
+    for (let s = 1; s <= 6; s++) {
+      saved.previewTeams[key][`slot${s}`] = { item: undefined, pkmn: undefined };
+    }
   }
 
-  saved.previewTeams.preview1 = saved.preview1
-  saved.previewTeams.preview2 = saved.preview2
-  saved.previewTeams.preview3 = saved.preview3
-  saved.previewTeams.preview4 = saved.preview4
-  saved.previewTeams.preview5 = saved.preview5
-  saved.previewTeams.preview6 = saved.preview6
-
-  saved.preview1 = undefined
-  saved.preview2 = undefined
-  saved.preview3 = undefined
-  saved.preview4 = undefined
-  saved.preview5 = undefined
-  saved.preview6 = undefined
+  // Migrate old preview slots (1-6) into the new format
+  for (let n = 1; n <= 6; n++) {
+    if (saved[`preview${n}`]) saved.previewTeams[`preview${n}`] = saved[`preview${n}`];
+    saved[`preview${n}`] = undefined;
+  }
 
   saved.currentPreviewTeam = "preview1"
 
@@ -247,94 +193,41 @@ document.getElementById("settings-alternate-rotation").addEventListener("change"
   saved.alternateWildRotation = document.getElementById(`settings-alternate-rotation`).value
 });
 
+//--Theme color definitions (add new themes here)
+const themes = {
+  dark:    { dark1: '#36342F', dark2: '#444138', light1: '#94886B', light2: '#ECDEB7' },
+  verdant: { dark1: '#32493dff', dark2: '#475243ff', light1: '#94886B', light2: '#ECDEB7' },
+  lilac:   { dark1: '#454152ff', dark2: '#4d5163ff', light1: '#6b9486ff', light2: '#b7ddecff' },
+  cherry:  { dark1: '#523a3eff', dark2: '#6b4c4dff', light1: '#a78b66ff', light2: '#F9E7B2' },
+  coral:   { dark1: '#3A4048', dark2: '#42424D', light1: '#E07B6A', light2: '#FFE4DB' },
+  spooky:  { dark1: '#292825', dark2: '#332f2b', light1: '#b46c42', light2: '#d3c49d' },
+  onyx:    { dark1: '#1a1717ff', dark2: '#1f2222ff', light1: '#3c3a49ff', light2: '#707083ff' },
+  oled:    { dark1: '#000000ff', dark2: '#0f0f0fff', light1: '#222225ff', light2: '#37373dff' },
+};
+
 function changeTheme(){
 
   let theme = saved.theme
   if (saved.theme == "default" && saved.currentSeason == season.halloween.id) theme = `spooky`
   if (saved.theme == "default" && saved.currentSeason == undefined) theme = `dark`
 
-
   document.querySelectorAll('.season-background').forEach(el => {
     el.classList.remove('season-background-halloween');
   });
 
+  // Apply theme colors from the themes table
+  const colors = themes[theme] || themes.dark;
+  document.documentElement.style.setProperty('--dark1', colors.dark1);
+  document.documentElement.style.setProperty('--dark2', colors.dark2);
+  document.documentElement.style.setProperty('--light1', colors.light1);
+  document.documentElement.style.setProperty('--light2', colors.light2);
 
-  if (theme === "dark"){
-    document.documentElement.style.setProperty('--dark1', '#36342F');
-    document.documentElement.style.setProperty('--dark2', '#444138');
-    document.documentElement.style.setProperty('--light1', '#94886B');
-    document.documentElement.style.setProperty('--light2', '#ECDEB7');
+  // Spooky theme special: add halloween background class
+  if (theme === "spooky") {
+    document.querySelectorAll('.season-background').forEach(el => {
+      el.classList.add('season-background-halloween');
+    });
   }
-
-  if (theme === "verdant"){
-    document.documentElement.style.setProperty('--dark1', '#32493dff');
-    document.documentElement.style.setProperty('--dark2', '#475243ff');
-    document.documentElement.style.setProperty('--light1', '#94886B');
-    document.documentElement.style.setProperty('--light2', '#ECDEB7');
-  }
-
-  if (theme === "lilac"){
-    document.documentElement.style.setProperty('--dark1', '#454152ff');
-    document.documentElement.style.setProperty('--dark2', '#4d5163ff');
-    document.documentElement.style.setProperty('--light1', '#6b9486ff');
-    document.documentElement.style.setProperty('--light2', '#b7ddecff');
-  }
-
-  if (theme === "cherry"){
-    document.documentElement.style.setProperty('--dark1', '#523a3eff');
-    document.documentElement.style.setProperty('--dark2', '#6b4c4dff');
-    document.documentElement.style.setProperty('--light1', '#a78b66ff');
-    document.documentElement.style.setProperty('--light2', '#F9E7B2');
-  }
-
-  if (theme === "coral"){
-    document.documentElement.style.setProperty('--dark1', '#3A4048');
-    document.documentElement.style.setProperty('--dark2', '#42424D');
-    document.documentElement.style.setProperty('--light1', '#E07B6A');
-    document.documentElement.style.setProperty('--light2', '#FFE4DB');
-  }
-
-
-  if (theme === "spooky"){
-    document.documentElement.style.setProperty('--dark1', '#292825');
-    document.documentElement.style.setProperty('--dark2', '#332f2b');
-    document.documentElement.style.setProperty('--light1', '#b46c42');
-    document.documentElement.style.setProperty('--light2', '#d3c49d');
-
-
-  document.querySelectorAll('.season-background').forEach(el => {
-    el.classList.add('season-background-halloween');
-  });
-
-
-  }
-
-
-
-  if (theme === "onyx"){
-    document.documentElement.style.setProperty('--dark1', '#1a1717ff');
-    document.documentElement.style.setProperty('--dark2', '#1f2222ff');
-    document.documentElement.style.setProperty('--light1', '#3c3a49ff');
-    document.documentElement.style.setProperty('--light2', '#707083ff');
-  }
-
-  if (theme === "oled"){
-    document.documentElement.style.setProperty('--dark1', '#000000ff');
-    document.documentElement.style.setProperty('--dark2', '#0f0f0fff');
-    document.documentElement.style.setProperty('--light1', '#222225ff');
-    document.documentElement.style.setProperty('--light2', '#37373dff');
-  }
-
-
-
-  
-
-
-
-
-
-
-
 }
 
 
@@ -459,69 +352,6 @@ observer.observe(document.body, {
 
 
 //--Gives Pokemon appropiate moves
-/*
-function learnPkmnMove(id, level, mod) {
-    let attempts = 0;
-    const MAX_ATTEMPTS = 100;
-
-    while (attempts++ < MAX_ATTEMPTS) {
-        const types = pkmn[id].type;
-        const knownMoves = pkmn[id].movepool || [];
-
-        let tier = 1;
-        if (level >= 10 && rng(0.25)) tier++;
-        if (level >= 20 && rng(0.25)) tier++;
-        if (level >= 30 && rng(0.25)) tier++;
-        if (level >= 50 && rng(0.25)) tier++;
-        if (level >= 60 && rng(0.25)) tier++;
-        tier = Math.min(tier, 3);
-
-        const allMoves = Object.keys(move).filter(m => {
-            const data = move[m];
-            const notKnown = mod !== "wild" ? !knownMoves.includes(m) : true;
-            return data.rarity === tier && notKnown;
-        });
-
-        //safefail for when no moves are given
-        if (!allMoves.length) return undefined;
-
-        const typeMatch = [];
-        const movesetMatch = [];
-        const allTag = [];
-
-        allMoves.forEach(m => {
-            const data = move[m];
-            if (types.includes(data.type)) typeMatch.push(m);
-            else if (data.moveset.includes("all")) allTag.push(m);
-            else if (types.some(t => data.moveset.includes(t))) movesetMatch.push(m);
-        });
-
-        if (level === 1) {
-            if (!typeMatch.length) continue;
-            const chosenMove = typeMatch[Math.floor(Math.random() * typeMatch.length)];
-            if (move[chosenMove].power <= 0) continue;
-            return move[chosenMove].id;
-        }
-
-        let chosenList;
-
-        if (rng(0.70)) {
-            chosenList = typeMatch.length ? typeMatch : movesetMatch;
-        } else if (rng(0.50)) {
-            chosenList = movesetMatch.length ? movesetMatch : typeMatch;
-        } else {
-            chosenList = allTag.length ? allTag : (typeMatch.length ? typeMatch : movesetMatch);
-        }
-
-        if (!chosenList || !chosenList.length) continue;
-
-        const chosenMove = chosenList[Math.floor(Math.random() * chosenList.length)];
-        return move[chosenMove].id;
-    }
-
-    return undefined;
-}*/
-
 
 
 function learnPkmnMove(id, level, mod, exclude = []) {
@@ -920,33 +750,28 @@ function infoMisc(){
   saved.gamemodIvs = false
 
 
+//--Game modifier mappings: [savedKey, checkboxId]
+const gameModifiers = [
+  ['gamemodAfk',      'checkbox-mode-afk'],
+  ['gamemodHard',     'checkbox-mode-hard'],
+  ['gamemodNuzlocke', 'checkbox-mode-nuzloke'],
+  ['gamemodIvs',      'checkbox-mode-ivs'],
+];
+
 //fixes visual bugs of settings, thanks html very cool
 function updateSettings(alt){
 
-
-
   document.getElementById("settings-theme").value = saved.theme
 
-  if (saved.hideGotPkmn == "true") {document.getElementById("settings-hide-got").value = "true"} else document.getElementById("settings-hide-got").value = "false"
-  if (saved.alternateWildRotation == "true") {document.getElementById("settings-alternate-rotation").value = "true"} else document.getElementById("settings-alternate-rotation").value = "false"
-
+  document.getElementById("settings-hide-got").value = saved.hideGotPkmn == "true" ? "true" : "false"
+  document.getElementById("settings-alternate-rotation").value = saved.alternateWildRotation == "true" ? "true" : "false"
 
   if (document.getElementById("tooltip-modifiers-list")) {
-
-  if (alt != true) if (saved.gamemodAfk == true) {document.getElementById("checkbox-mode-afk").checked = true} else document.getElementById("checkbox-mode-afk").checked = false
-  if (alt == true) if (document.getElementById("checkbox-mode-afk").checked) {  saved.gamemodAfk = true; } else saved.gamemodAfk = false
-
-  if (alt != true) if (saved.gamemodHard == true) {document.getElementById("checkbox-mode-hard").checked = true} else document.getElementById("checkbox-mode-hard").checked = false
-  if (alt == true) if (document.getElementById("checkbox-mode-hard").checked) {  saved.gamemodHard = true; } else saved.gamemodHard = false
-
-  if (alt != true) if (saved.gamemodNuzlocke == true) {document.getElementById("checkbox-mode-nuzloke").checked = true} else document.getElementById("checkbox-mode-nuzloke").checked = false
-  if (alt == true) if (document.getElementById("checkbox-mode-nuzloke").checked) {  saved.gamemodNuzlocke = true; } else saved.gamemodNuzlocke = false
-
-  if (alt != true) if (saved.gamemodIvs == true) {document.getElementById("checkbox-mode-ivs").checked = true} else document.getElementById("checkbox-mode-ivs").checked = false
-  if (alt == true) if (document.getElementById("checkbox-mode-ivs").checked) {  saved.gamemodIvs = true; } else saved.gamemodIvs = false
-
+    for (const [key, id] of gameModifiers) {
+      const el = document.getElementById(id);
+      if (alt != true) { el.checked = saved[key] == true; }
+      if (alt == true) { saved[key] = el.checked; }
+    }
   }
-
-
 
 }

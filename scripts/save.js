@@ -3,6 +3,16 @@ saved.firstTimePlaying = true //esta flag se tiene que quitar cuando seleccione 
 
 function saveGame() {
   if (saved.firstTimePlaying == true) return //scary!
+
+  // Warn if localStorage is getting full
+  try {
+    const used = new Blob(Object.values(localStorage)).size;
+    const limit = 5 * 1024 * 1024; // 5MB typical limit
+    if (used > limit * 0.8) {
+      console.warn(`localStorage is ${((used/limit)*100).toFixed(0)}% full! Consider exporting your save data.`);
+    }
+  } catch(e) { /* ignore size check errors */ }
+
   let data = {};
 
   // Variable suelta
@@ -88,7 +98,14 @@ function loadGame() {
     return;
   } 
 
-  const data = JSON.parse(raw);
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch (e) {
+    console.error("Save data corrupted:", e);
+    alert("Warning: Your save data appears to be corrupted. The game will start fresh. You can try importing a backup from Settings > Import Data.");
+    return;
+  }
 
   if (data.saved !== undefined) saved = data.saved;
   if (data.team !== undefined) team = data.team;
