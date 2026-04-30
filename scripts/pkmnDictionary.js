@@ -616,7 +616,7 @@ pkmn.pikachu = {
         sdef: 50,
         spe: 90,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.raichu, item: item.thunderStone } } },
+    evolve: function() { return { 1: { pkmn: pkmn.raichu, item: item.thunderStone }, 2: { pkmn: pkmn.alolanRaichu, item: item.alolanStone } } },
     hiddenAbility: ability.electricSurge,
     signature : move.voltTackle
 }
@@ -5596,7 +5596,8 @@ pkmn.ursaring = {
         spe: 55,
     },
     hiddenAbility: ability.guts,
-    signature : move.headlongRush
+    signature : move.headlongRush,
+    evolve: function() { return { 1: { pkmn: pkmn.ursaluna, item: item.hisuianStone } } },
 }
 
 pkmn.ursaluna = {
@@ -5915,7 +5916,8 @@ pkmn.stantler = {
         sdef: 65,
         spe: 85,
     },
-    signature : move.psyshieldBash
+    signature : move.psyshieldBash,
+    evolve: function() { return { 1: { pkmn: pkmn.wyrdeer, item: item.hisuianStone } } },
 }
 
 pkmn.wyrdeer = {
@@ -8428,7 +8430,8 @@ pkmn.latias = {
         spe: 110,
     },
     hiddenAbility: ability.levitate,
-    signature : move.mistBall
+    signature : move.mistBall,
+    evolve: function() { return { 1: { pkmn: pkmn.megaLatias, item: item.latiasite } } },
 }
 
 pkmn.megaLatias = {
@@ -8458,6 +8461,7 @@ pkmn.latios = {
     },
     hiddenAbility: ability.levitate,
     signature : move.lusterPurge,
+    evolve: function() { return { 1: { pkmn: pkmn.megaLatios, item: item.latiosite } } },
 }
 
 pkmn.megaLatios = {
@@ -8542,6 +8546,7 @@ pkmn.rayquaza = {
         sdef: 90,
         spe: 95,
     },
+    evolve: function() { return { 1: { pkmn: pkmn.megaRayquaza, item: item.meteorite } } },
     lore: `The force that watches over the world from above. It tempers the chaos of the seas and the land, acting as a mediator between Kyogre and Groudon. The winds and currents obey its passage, and it stands as guardian of the skies.`
 }
 
@@ -10575,7 +10580,7 @@ pkmn.dewott = {
         sdef: 60,
         spe: 60,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.samurott, level: evolutionLevel2 } } },
+    evolve: function() { return { 1: { pkmn: pkmn.samurott, level: evolutionLevel2 }, 2: { pkmn: pkmn.hisuianSamurott, item: item.hisuianStone } } },
     hiddenAbility: ability.iaido,
     signature : move.razorShell
 }
@@ -15066,7 +15071,7 @@ pkmn.dartrix = {
     sdef: 70,
     spe: 52,
   },
-  evolve: function() { return { 1: { pkmn: pkmn.decidueye, level: evolutionLevel2 } } },
+  evolve: function() { return { 1: { pkmn: pkmn.decidueye, level: evolutionLevel2 }, 2: { pkmn: pkmn.hisuianDecidueye, item: item.hisuianStone } } },
     hiddenAbility: ability.noGuard,
 }
 

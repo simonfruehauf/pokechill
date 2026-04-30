@@ -578,6 +578,41 @@ shop.shophisuianStone = {
     category: `evolution`,
 }
 
+shop.shopalolanStone = {
+    icon: item.alolanStone.id,
+    price: 20,
+    category: `evolution`,
+}
+
+shop.shopabsolite = { icon: item.absolite.id, name: `Absolite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.absolite.got+=21} }
+shop.shopaltarianite = { icon: item.altarianite.id, name: `Altarianite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.altarianite.got+=21} }
+shop.shopampharosite = { icon: item.ampharosite.id, name: `Ampharosite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.ampharosite.got+=21} }
+shop.shopaudinite = { icon: item.audinite.id, name: `Audinite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.audinite.got+=21} }
+shop.shopbanettite = { icon: item.banettite.id, name: `Banettite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.banettite.got+=21} }
+shop.shopdiancite = { icon: item.diancite.id, name: `Diancite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.diancite.got+=21} }
+shop.shopgardevoirite = { icon: item.gardevoirite.id, name: `Gardevoirite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.gardevoirite.got+=21} }
+shop.shophoundoominite = { icon: item.houndoominite.id, name: `Houndoominite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.houndoominite.got+=21} }
+shop.shopkangaskhanite = { icon: item.kangaskhanite.id, name: `Kangaskhanite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.kangaskhanite.got+=21} }
+shop.shoplopunnite = { icon: item.lopunnite.id, name: `Lopunnite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.lopunnite.got+=21} }
+shop.shopmedichamite = { icon: item.medichamite.id, name: `Medichamite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.medichamite.got+=21} }
+shop.shopsablenite = { icon: item.sablenite.id, name: `Sablenite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.sablenite.got+=21} }
+shop.shopsalamencite = { icon: item.salamencite.id, name: `Salamencite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.salamencite.got+=21} }
+shop.shopsharpedonite = { icon: item.sharpedonite.id, name: `Sharpedonite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.sharpedonite.got+=21} }
+shop.shopslowbronite = { icon: item.slowbronite.id, name: `Slowbronite x21`, price: 150, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.slowbronite.got+=21} }
+shop.shoplatiasite = { icon: item.latiasite.id, name: `Latiasite x21`, price: 250, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.latiasite.got+=21} }
+shop.shoplatiosite = { icon: item.latiosite.id, name: `Latiosite x21`, price: 250, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.latiosite.got+=21} }
+shop.shopmeteorite = { icon: item.meteorite.id, name: `Meteorite x21`, price: 250, currency: item.goldenBottleCap.id, category: `evolution`, effect: function() {item.meteorite.got+=21} }
+
+shop.shopspikyPichu = {
+    icon: pkmn.spikyPichu.id,
+    name: `Spiky-eared Pichu`,
+    price: 100,
+    currency: item.goldenBottleCap.id,
+    category: `pokedex`,
+    effect: function() {givePkmn(pkmn.spikyPichu, 1)}
+}
+
+
 
 
 
