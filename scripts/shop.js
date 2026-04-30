@@ -503,6 +503,82 @@ shop.shopfalinksite = {
     effect: function() {item.falinksite.got+=21}
 }
 
+shop.shopmewtwoniteX = {
+    icon: item.mewtwoniteX.id,
+    name: `Mewtwonite X x21`,
+    price: 250,
+    currency: item.goldenBottleCap.id,
+    category: `evolution`,
+    effect: function() {item.mewtwoniteX.got+=21}
+}
+
+shop.shopmewtwoniteY = {
+    icon: item.mewtwoniteY.id,
+    name: `Mewtwonite Y x21`,
+    price: 250,
+    currency: item.goldenBottleCap.id,
+    category: `evolution`,
+    effect: function() {item.mewtwoniteY.got+=21}
+}
+
+shop.shopclefableite = {
+    icon: item.clefableite.id,
+    name: `Clefableite x21`,
+    price: 150,
+    currency: item.goldenBottleCap.id,
+    category: `evolution`,
+    effect: function() {item.clefableite.got+=21}
+}
+
+shop.shopvictreebelite = {
+    icon: item.victreebelite.id,
+    name: `Victreebelite x21`,
+    price: 150,
+    currency: item.goldenBottleCap.id,
+    category: `evolution`,
+    effect: function() {item.victreebelite.got+=21}
+}
+
+shop.shopferaligatrite = {
+    icon: item.feraligatrite.id,
+    name: `Feraligatrite x21`,
+    price: 150,
+    currency: item.goldenBottleCap.id,
+    category: `evolution`,
+    effect: function() {item.feraligatrite.got+=21}
+}
+
+shop.shopmeganiumite = {
+    icon: item.meganiumite.id,
+    name: `Meganiumite x21`,
+    price: 150,
+    currency: item.goldenBottleCap.id,
+    category: `evolution`,
+    effect: function() {item.meganiumite.got+=21}
+}
+
+shop.shopstarmieite = {
+    icon: item.starmieite.id,
+    name: `Starmieite x21`,
+    price: 150,
+    currency: item.goldenBottleCap.id,
+    category: `evolution`,
+    effect: function() {item.starmieite.got+=21}
+}
+
+shop.shopblackAugurite = {
+    icon: item.blackAugurite.id,
+    price: 20,
+    category: `evolution`,
+}
+
+shop.shophisuianStone = {
+    icon: item.hisuianStone.id,
+    price: 20,
+    category: `evolution`,
+}
+
+
 
 
 shop.shoppowerAnklet = {

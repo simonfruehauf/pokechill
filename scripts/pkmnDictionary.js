@@ -1037,7 +1037,8 @@ pkmn.clefable = {
         spe: 60,
     },
     hiddenAbility: ability.magicGuard,
-    eggMove : move.lunarDance
+    eggMove : move.lunarDance,
+    evolve: function() { return { 1: { pkmn: pkmn.megaClefable, item: item.clefableite } } },
 }
 
 pkmn.megaClefable = {
@@ -1822,7 +1823,8 @@ pkmn.victreebel = {
         spe: 70,
     },
     hiddenAbility: ability.chlorophyll,
-    eggMove : move.appleAcid
+    eggMove : move.appleAcid,
+    evolve: function() { return { 1: { pkmn: pkmn.megaVictreebel, item: item.victreebelite } } },
 }
 
 pkmn.megaVictreebel = {
@@ -3068,7 +3070,8 @@ pkmn.starmie = {
         spe: 115,
     },
     hiddenAbility: ability.synchronize,
-    signature : move.camouflage
+    signature : move.camouflage,
+    evolve: function() { return { 1: { pkmn: pkmn.megaStarmie, item: item.starmieite } } },
 }
 
 pkmn.megaStarmie = {
@@ -3154,7 +3157,7 @@ pkmn.scyther = {
         sdef: 80,
         spe: 105,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.scizor, item: item.metalCoat } } },
+    evolve: function() { return { 1: { pkmn: pkmn.scizor, item: item.metalCoat }, 2: { pkmn: pkmn.kleavor, item: item.blackAugurite } } },
     hiddenAbility: ability.technician,
 }
 
@@ -4043,7 +4046,7 @@ pkmn.mewtwo = {
         sdef: 90,
         spe: 130,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.megaMewtwoX, item: item.mewtwoniteX } } },
+    evolve: function() { return { 1: { pkmn: pkmn.megaMewtwoX, item: item.mewtwoniteX }, 2: { pkmn: pkmn.megaMewtwoY, item: item.mewtwoniteY } } },
     lore: `Shaped by human hands, bears the weight of creation twisted. Though it carries the memory of life that came before, it walks a path apart, questioning the bounds of its own existence.`
 }
 
@@ -4128,7 +4131,8 @@ pkmn.meganium = {
         spe: 80,
     },
     hiddenAbility: ability.costar,
-    eggMove : move.floralHealing
+    eggMove : move.floralHealing,
+    evolve: function() { return { 1: { pkmn: pkmn.megaMeganium, item: item.meganiumite } } },
 }
 
 pkmn.megaMeganium = {
@@ -4171,7 +4175,7 @@ pkmn.quilava = {
         sdef: 65,
         spe: 80,
     },
-    evolve: function() { return { 1: { pkmn: pkmn.typhlosion, level: evolutionLevel2 } } },
+    evolve: function() { return { 1: { pkmn: pkmn.typhlosion, level: evolutionLevel2 }, 2: { pkmn: pkmn.hisuianTyphlosion, item: item.hisuianStone } } },
     hiddenAbility: ability.flareBoost,
     signature : move.inferno
 }
@@ -4242,6 +4246,7 @@ pkmn.feraligatr = {
         spe: 78,
     },
     hiddenAbility: ability.sheerForce,
+    evolve: function() { return { 1: { pkmn: pkmn.megaFeraligatr, item: item.feraligatrite } } },
 }
 
 pkmn.megaFeraligatr = {

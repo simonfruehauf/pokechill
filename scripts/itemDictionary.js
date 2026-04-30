@@ -1433,6 +1433,52 @@ item.mewtwoniteY = {
     heldBonusPkmn: function() { return pkmn.megaMewtwoY.id },
 }
 
+item.clefableite = {
+    evo: true,
+    info: function() {return `Use: Evolve a certain Pokemon<br>When held: Increases the damage dealt by ${format(this.heldBonusPkmn())} by x${this.heldBonusPower().toFixed(2)}`},
+    heldBonusPower: function() { return 1.15+(0.1*returnItemLevel(this.id)) },
+    heldBonusPkmn: function() { return pkmn.megaClefable.id },
+}
+
+item.victreebelite = {
+    evo: true,
+    info: function() {return `Use: Evolve a certain Pokemon<br>When held: Increases the damage dealt by ${format(this.heldBonusPkmn())} by x${this.heldBonusPower().toFixed(2)}`},
+    heldBonusPower: function() { return 1.15+(0.1*returnItemLevel(this.id)) },
+    heldBonusPkmn: function() { return pkmn.megaVictreebel.id },
+}
+
+item.feraligatrite = {
+    evo: true,
+    info: function() {return `Use: Evolve a certain Pokemon<br>When held: Increases the damage dealt by ${format(this.heldBonusPkmn())} by x${this.heldBonusPower().toFixed(2)}`},
+    heldBonusPower: function() { return 1.15+(0.1*returnItemLevel(this.id)) },
+    heldBonusPkmn: function() { return pkmn.megaFeraligatr.id },
+}
+
+item.meganiumite = {
+    evo: true,
+    info: function() {return `Use: Evolve a certain Pokemon<br>When held: Increases the damage dealt by ${format(this.heldBonusPkmn())} by x${this.heldBonusPower().toFixed(2)}`},
+    heldBonusPower: function() { return 1.15+(0.1*returnItemLevel(this.id)) },
+    heldBonusPkmn: function() { return pkmn.megaMeganium.id },
+}
+
+item.starmieite = {
+    evo: true,
+    info: function() {return `Use: Evolve a certain Pokemon<br>When held: Increases the damage dealt by ${format(this.heldBonusPkmn())} by x${this.heldBonusPower().toFixed(2)}`},
+    heldBonusPower: function() { return 1.15+(0.1*returnItemLevel(this.id)) },
+    heldBonusPkmn: function() { return pkmn.megaStarmie.id },
+}
+
+item.blackAugurite = {
+    evo: true,
+    info: function() {return `Use: Evolve a certain Pokemon`},
+}
+
+item.hisuianStone = {
+    evo: true,
+    info: function() {return `Use: Evolve certain kinds of Pokemon`},
+}
+
+
 item.pidgeotite = {
     
     evo: true,
