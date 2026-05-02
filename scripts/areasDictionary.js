@@ -5807,7 +5807,7 @@ areas.frontierBattleFactory = {
 
 
 
-let rotationDimensionMax = 1;
+let rotationDimensionMax = 4;
 
 
 
@@ -6036,7 +6036,7 @@ areas.dimensionKyuremWhite = {
         slot1: pkmn.kyuremWhite,
         slot1Moves: [move.blueFlare.id, move.iceBeam.id, move.dragonPulse.id, move.thunder.id],
     },
-    reward: [pkmn.magikarp],
+    reward: [pkmn.kyuremWhite, item.whiteApricorn],
     fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.wonderWard.id],
     skills: { 3: skill.ironWill.id, 2: skill.suddenDeath.id, 1: skill.demoralisingRoar.id }
 }
@@ -6053,9 +6053,206 @@ areas.dimensionMegaRayquaza = {
         slot1: pkmn.megaRayquaza,
         slot1Moves: [move.flareBlitz.id, move.fly.id, move.dracoMeteor.id, move.earthquake.id],
     },
-    reward: [pkmn.magikarp],
+    reward: [pkmn.megaRayquaza, item.blackApricorn],
     fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.ironBody.id, field.wonderWard.id],
     skills: { 3: skill.omniboost.id, 2: skill.suddenDeath.id, 1: skill.demoralisingRoar.id }
+}
+
+//rotation 2
+
+areas.dimensionDarkrai = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.darkrai,
+    tier: 1,
+    rotation: 2,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.darkrai,
+        slot1Moves: [move.darkPulse.id, move.nastyPlot.id, move.shadowBall.id, move.psychic.id],
+    },
+    reward: [pkmn.darkrai, item.whiteApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.fatiguingCurse.id],
+    skills: { 3: skill.ironSpirit.id }
+}
+
+areas.dimensionLugia = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.lugia,
+    tier: 2,
+    rotation: 2,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.lugia,
+        slot1Moves: [move.aeroblast.id, move.calmMind.id, move.psychic.id],
+    },
+    reward: [pkmn.lugia, item.whiteApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.weakeningCurse.id],
+    skills: { 3: skill.ironWill.id }
+}
+
+areas.dimensionDialga = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.dialga,
+    tier: 3,
+    rotation: 2,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.dialga,
+        slot1Moves: [move.dragonPulse.id, move.flashCannon.id, move.auraSphere.id, move.earthPower.id],
+    },
+    reward: [pkmn.dialga, item.blackApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.reverseField.id],
+    skills: { 3: skill.ironWill.id, 2: skill.suddenDeath.id }
+}
+
+areas.dimensionArceus = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.arceus,
+    tier: 4,
+    rotation: 2,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.arceus,
+        slot1Moves: [move.judgment.id, move.extremeSpeed.id, move.calmMind.id],
+    },
+    reward: [pkmn.arceus, item.blackApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.wonderWard.id]
+}
+
+//rotation 3
+
+areas.dimensionMew = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.mew,
+    tier: 1,
+    rotation: 3,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.mew,
+        slot1Moves: [move.psychic.id, move.ancientPower.id, move.metronome.id],
+    },
+    reward: [pkmn.mew, item.whiteApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.wonderWard.id],
+    skills: { 3: skill.ironSpirit.id }
+}
+
+areas.dimensionHoOh = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.hooh,
+    tier: 2,
+    rotation: 3,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.hooh,
+        slot1Moves: [move.sacredFire.id, move.bulkUp.id, move.fly.id],
+    },
+    reward: [pkmn.hooh, item.whiteApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.weakeningCurse.id],
+    skills: { 3: skill.ironWill.id }
+}
+
+areas.dimensionKyogre = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.kyogre,
+    tier: 3,
+    rotation: 3,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.kyogre,
+        slot1Moves: [move.hydroPump.id, move.iceBeam.id, move.thunder.id, move.calmMind.id],
+    },
+    reward: [pkmn.kyogre, item.blackApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id],
+    skills: { 3: skill.ironWill.id, 2: skill.suddenDeath.id }
+}
+
+areas.dimensionEternatus = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.eternatus,
+    tier: 4,
+    rotation: 3,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.eternatus,
+        slot1Moves: [move.dragonPulse.id, move.sludgeWave.id, move.flamethrower.id],
+    },
+    reward: [pkmn.eternatus, item.blackApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.fatiguingCurse.id, field.wonderWard.id],
+    skills: { 3: skill.omniboost.id, 2: skill.suddenDeath.id }
+}
+
+//rotation 4
+
+areas.dimensionCelebi = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.celebi,
+    tier: 1,
+    rotation: 4,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.celebi,
+        slot1Moves: [move.psychic.id, move.leafStorm.id, move.nastyPlot.id],
+    },
+    reward: [pkmn.celebi, item.whiteApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id],
+    skills: { 3: skill.ironSpirit.id }
+}
+
+areas.dimensionXerneas = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.xerneas,
+    tier: 2,
+    rotation: 4,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.xerneas,
+        slot1Moves: [move.moonblast.id, move.psychic.id, move.thunderbolt.id],
+    },
+    reward: [pkmn.xerneas, item.whiteApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.weakeningCurse.id],
+    skills: { 3: skill.ironWill.id }
+}
+
+areas.dimensionLunala = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.lunala,
+    tier: 3,
+    rotation: 4,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.lunala,
+        slot1Moves: [move.moongeistBeam.id, move.psychic.id, move.moonblast.id, move.calmMind.id],
+    },
+    reward: [pkmn.lunala, item.blackApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.reverseField.id],
+    skills: { 3: skill.ironWill.id, 2: skill.suddenDeath.id }
+}
+
+areas.dimensionZygarde100 = {
+    type: `dimensionBlueprint`,
+    icon: pkmn.zygarde100,
+    tier: 4,
+    rotation: 4,
+    difficulty: tier4difficulty,
+    level: 100,
+    team: {
+        slot1: pkmn.zygarde100,
+        slot1Moves: [move.dragonPulse.id, move.earthPower.id, move.extremeSpeed.id],
+    },
+    reward: [pkmn.zygarde100, item.blackApricorn],
+    fieldEffect: [field.noMercy.id, field.stealthRocks.id, field.ironBody.id, field.wonderWard.id],
+    skills: { 3: skill.omniboost.id, 2: skill.suddenDeath.id }
 }
 
 
