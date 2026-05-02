@@ -2540,7 +2540,8 @@ body {
 
 }
 
-.pokedex-search {
+.pokedex-search,
+#pokedex-filter-ability-name {
     width: 100%;
     background: rgba(0, 0, 0, 0.7);
     border-radius: 0.5rem;

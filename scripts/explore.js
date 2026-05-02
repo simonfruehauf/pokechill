@@ -4943,6 +4943,18 @@ document.getElementById("pokedex-filter-mega").addEventListener("change", e => {
   updatePokedex()
 });
 
+document.getElementById("pokedex-filter-pokerus").addEventListener("change", e => {
+    updatePokedex()
+});
+
+document.getElementById("pokedex-filter-ha").addEventListener("change", e => {
+    updatePokedex()
+});
+
+document.getElementById("pokedex-filter-ability-name").addEventListener("input", e => {
+    updatePokedex()
+});
+
 function resetPokedexFilters(){
     tagSystemTagSearch = []
 
@@ -4959,6 +4971,9 @@ function resetPokedexFilters(){
     document.getElementById("pokedex-filter-signature").value = "all";
     document.getElementById("pokedex-filter-ribbon").value = "all";
     document.getElementById("pokedex-filter-mega").value = "all";
+    document.getElementById("pokedex-filter-pokerus").value = "all";
+    document.getElementById("pokedex-filter-ha").value = "all";
+    document.getElementById("pokedex-filter-ability-name").value = "";
 }
 
 
@@ -5210,6 +5225,32 @@ function updatePokedex(){
         if (document.getElementById(`pokedex-filter-level`).value !== "all" && !( pkmn[i].level <= (document.getElementById(`pokedex-filter-level`).value) &&  pkmn[i].level >= (document.getElementById(`pokedex-filter-level`).value-19) )    ) continue
         if (document.getElementById(`pokedex-filter-ability`).value !== "all" && document.getElementById(`pokedex-filter-ability`).value!=4 && ability[pkmn[i].ability].rarity !=  document.getElementById(`pokedex-filter-ability`).value   ) continue
         if (document.getElementById(`pokedex-filter-ability`).value == "4" && (pkmn[i].hiddenAbilityUnlocked == true ||  pkmn[i].hiddenAbility==undefined) ) continue        
+        
+        const abilityNameFilter = document.getElementById('pokedex-filter-ability-name').value.toLowerCase();
+        if (abilityNameFilter !== "") {
+            const currentAbilityPretty = format(pkmn[i].ability).toLowerCase();
+            let hasMatchingHAName = false;
+            if (pkmn[i].hiddenAbilityUnlocked && pkmn[i].hiddenAbility) {
+                hasMatchingHAName = format(pkmn[i].hiddenAbility.id).toLowerCase().includes(abilityNameFilter);
+            }
+            if (!currentAbilityPretty.includes(abilityNameFilter) && !hasMatchingHAName) continue;
+        }
+
+        if (document.getElementById(`pokedex-filter-pokerus`).value !== "all") {
+            const hasPokerus = pkmn[i].pokerus == true;
+            if (document.getElementById(`pokedex-filter-pokerus`).value == "true" && !hasPokerus) continue;
+            if (document.getElementById(`pokedex-filter-pokerus`).value == "false" && hasPokerus) continue;
+        }
+
+        if (document.getElementById(`pokedex-filter-ha`).value !== "all") {
+            const filterValue = document.getElementById(`pokedex-filter-ha`).value;
+            const hasHA = pkmn[i].hiddenAbility !== undefined;
+            const unlockedHA = pkmn[i].hiddenAbilityUnlocked == true;
+            
+            if (filterValue == "unlocked" && !unlockedHA) continue;
+            if (filterValue == "locked" && (!hasHA || unlockedHA)) continue;
+            if (filterValue == "none" && hasHA) continue;
+        }
         
         
         if (document.getElementById(`pokedex-filter-division`).value !== "all" && returnPkmnDivision(pkmn[i]) !=  document.getElementById(`pokedex-filter-division`).value   ) continue

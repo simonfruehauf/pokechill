@@ -209,6 +209,16 @@
                     <div class="separator-solid" style="width: 90%; height: 2px; opacity: 0.5; margin: 0;"></div>
                     <div
                         style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                            <input type="text" id="pokedex-filter-ability-name" placeholder="filter by ability name..."
+                                style="flex-grow: 1; margin-bottom: 0.5rem; padding: 0.5rem; border-radius: 0.5rem; border: none; background: var(--dark2); color: white;">
+                            <select id="pokedex-filter-ability" style="margin-bottom: 0.5rem; width: auto; flex-shrink: 0;">
+                                <option value="all">rarity</option>
+                                <option value=1>common</option>
+                                <option value=2>uncommon</option>
+                                <option value=3>rare</option>
+                            </select>
+                        </div>
                         <select id="pokedex-filter-type">
                             <option value="all">type</option>
                             <option value="normal">normal</option>
@@ -280,13 +290,6 @@
                             <option value="false">no mega evolution</option>
                             <option value="is-mega">is mega evolution</option>
                         </select>
-                        <select id="pokedex-filter-ability">
-                            <option value="all">ability</option>
-                            <option value=1>common</option>
-                            <option value=2>uncommon</option>
-                            <option value=3>rare</option>
-                            <option value=4>locked HA</option>
-                        </select>
                         <select id="pokedex-filter-shiny">
                             <option value="all">shiny</option>
                             <option value=true>is shiny</option>
@@ -302,6 +305,17 @@
                         <select id="pokedex-filter-ribbon">
                             <option value="all">ribbon</option>
                             <option value=true>has ribbon</option>
+                        </select>
+                        <select id="pokedex-filter-pokerus">
+                            <option value="all">pokerus</option>
+                            <option value=true>has pokerus</option>
+                            <option value=false>no pokerus</option>
+                        </select>
+                        <select id="pokedex-filter-ha">
+                            <option value="all">hidden ability</option>
+                            <option value="unlocked">unlocked</option>
+                            <option value="locked">locked</option>
+                            <option value="none">none</option>
                         </select>
                         <select id="pokedex-filter-tag" style="display: none;">
                             <option value="all">tag</option>
@@ -354,7 +368,8 @@
                 <div class="pokedex-search" data-help="searchPokedex"
                     style="display: flex; align-items: center; gap: 0.5rem;">
                     <input style="cursor: help; flex-grow: 1;" id="pokedex-search" type="text"
-                        placeholder="Right Click to see keywords">
+                        placeholder="Name Search..."
+                        style="width: 100%; margin-bottom: 0.5rem; padding: 0.5rem; border-radius: 0.5rem; border: none; background: var(--dark2); color: white;">
                     <svg onclick="tooltipData('help', 'searchPokedex')"
                         style="cursor: pointer; color: var(--light2); flex-shrink: 0;"
                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
