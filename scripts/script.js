@@ -809,6 +809,8 @@ saved.gamemodNuzlocke = false
 saved.gamemodHard = false
 saved.gamemodAfk = false
 saved.gamemodIvs = false
+saved.gamemodSpeed = false
+
 
 
 //--Game modifier mappings: [savedKey, checkboxId]
@@ -817,7 +819,9 @@ const gameModifiers = [
   ['gamemodHard', 'checkbox-mode-hard'],
   ['gamemodNuzlocke', 'checkbox-mode-nuzloke'],
   ['gamemodIvs', 'checkbox-mode-ivs'],
+  ['gamemodSpeed', 'checkbox-mode-speed'],
 ];
+
 
 //fixes visual bugs of settings, thanks html very cool
 function updateSettings(alt) {

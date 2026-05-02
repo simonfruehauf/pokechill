@@ -2182,7 +2182,12 @@ function gameLoop(now) {
 
     if (delta > 250) delta = 250;
 
+    if (saved.gamemodSpeed && areas[saved.currentArea]?.type !== "vs") {
+        delta *= 5;
+    }
+
     accumulator += delta;
+
 
     let stepsExecuted = 0;
 

@@ -855,8 +855,10 @@ function tooltipData(category, ttdata) {
         if (ttdata === `ModNoIvs`) document.getElementById("tooltipTitle").innerHTML = `No IVs`
         if (ttdata === `ModNoIvs`) document.getElementById("tooltipBottom").innerHTML = `All of your Pokemon have functionally max IVs regardless of their actual IVs. This can be toggled off without any permanent changes<br><br>There are no side-effects to this modifier`
 
-        if (ttdata === `ModAfk`) document.getElementById("tooltipTitle").innerHTML = `Longer AFK`
         if (ttdata === `ModAfk`) document.getElementById("tooltipBottom").innerHTML = `Fatigue damage is reduced by x3<br><br>There are no side-effects to this modifier`
+
+        if (ttdata === `ModSpeed`) document.getElementById("tooltipTitle").innerHTML = `5x Speed Boost`
+        if (ttdata === `ModSpeed`) document.getElementById("tooltipBottom").innerHTML = `Increases the game speed by 5x<br><br>This modifier is disabled during VS Trainer battles`
 
         if (ttdata === `curry`) document.getElementById("tooltipTitle").innerHTML = `Curry`
         if (ttdata === `curry`) document.getElementById("tooltipBottom").innerHTML = `Every 12h you can select up to three abilities to be active for your entire team during raids for 1 hour. These abilities follow the same rules as regular abilities, and wont stack with already existing ones`
