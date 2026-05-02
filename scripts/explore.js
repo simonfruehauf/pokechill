@@ -4801,6 +4801,8 @@ let lastEventPeriod = Math.floor(
   Math.floor(Date.now() / 86400000) / 3
 );
 
+getSeed();
+
 function updateEventCounters() {
   const contadores = document.querySelectorAll('.time-counter-event');
 
@@ -4870,9 +4872,18 @@ function updateRaidTimer(){
 }
 
 
+
 setInterval(updateDailyCounters, 1000);
 setInterval(updateEventCounters, 1000);
 setInterval(updateRaidTimer, 1000);
+
+// Force update when resuming the app on mobile
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") {
+        updateDailyCounters();
+        updateEventCounters();
+    }
+});
 
 
 document.getElementById("explore-pkmn-tag").addEventListener("change", e => {
@@ -10573,8 +10584,9 @@ window.addEventListener('load', function() {
     
 
 
+
     loadGame();
-    getSeed();
+    // getSeed() moved to run sooner to avoid stale data before load
     seasonCheck();
 
 

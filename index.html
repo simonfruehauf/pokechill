@@ -21,10 +21,10 @@
         <div onclick="changeTheme('onyx')">Onyx Theme</div>
         <div onclick="changeTheme('oled')">Oled Theme</div>
     </div>
-    <div id="game-version">v0.1</div>
+    <div id="game-version">v5.1</div>
     <div id="main-content">
         <div id="item-menu" style="display: none;" class="season-background">
-            <div class="item-menu-tags"> <!-- da hells this lol -->
+            <div class="item-menu-tags">
                 <span>
                     <div id="item-menu-cancel" onClick='
             
@@ -382,6 +382,7 @@
             <div class="settings-list">
                 <div onclick="exportData()">Export Data</div>
                 <div onclick="importData()">Import Data</div>
+                <div onclick="location.reload(true)">Force Reload</div>
                 <div onclick="textData()">Data to Text</div>
                 <div>Theme: <select id="settings-theme">
                         <option value="default">default</option>
