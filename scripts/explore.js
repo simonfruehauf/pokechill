@@ -4981,10 +4981,8 @@ document.getElementById("pokedex-sort-filter").addEventListener("change", e => {
   updatePokedex()
 });
 
-document.getElementById("pokedex-search").addEventListener("keydown", e => {
-  if (e.key === "Enter") {
+function pokedexSearch() {
     let searchValue = document.getElementById("pokedex-search").value.trim()
-    document.getElementById("pokedex-search").blur()
     
     if (searchValue === "") {
       searchedPkmn = []
@@ -4997,11 +4995,10 @@ document.getElementById("pokedex-search").addEventListener("keydown", e => {
     let allTerms = searchValue.split(/\s+/).filter(t => t !== '')
     let includeTerms = []
     let excludeTerms = []
-    let numericFilters = [] // NEW: Store numeric comparisons
+    let numericFilters = [] 
     
     allTerms.forEach(term => {
-      // NEW: Check for numeric comparison operators
-      const numericMatch = term.match(/^(ivsum|dictionaryTagIvSum)([><=]+)(\d+)$/i)
+      const numericMatch = term.match(/^(ivsum|bstsum|level|hp|atk|def|satk|sdef|spe|hpiv|atkiv|defiv|satkiv|sdefiv|speiv)([><=]+)(\d+)$/i)
       if (numericMatch) {
         numericFilters.push({
           field: numericMatch[1].toLowerCase(),
@@ -5017,20 +5014,16 @@ document.getElementById("pokedex-search").addEventListener("keydown", e => {
     
     let results = []
     
-    // Get base results from Fuse search
     if (includeTerms.length === 0 && excludeTerms.length > 0) {
       results = fusePkmn.getIndex().docs.map(item => ({ item }))
     } else if (includeTerms.length > 0) {
       let includeQuery = includeTerms.join(' ')
       
       if (includeQuery.includes('|')) {
-        // or filter
         results = fusePkmn.search(includeQuery)
       } else if (includeTerms.length === 1) {
-        // no filter
         results = fusePkmn.search(includeTerms[0])
       } else {
-        // and filter
         let allTermResults = includeTerms.map(term => {
           return new Set(fusePkmn.search(term).map(r => r.item))
         })
@@ -5042,15 +5035,19 @@ document.getElementById("pokedex-search").addEventListener("keydown", e => {
         results = items.map(item => ({ item }))
       }
     } else {
-      // NEW: If only numeric filters, start with all Pokemon
       results = fusePkmn.getIndex().docs.map(item => ({ item }))
     }
 
-    // NEW: Apply numeric filters
     if (numericFilters.length > 0) {
       results = results.filter(result => {
         return numericFilters.every(filter => {
-          const value = result.item.dictionaryTagIvSum || 0
+          let value = 0;
+          const field = filter.field;
+          if (field === "ivsum") value = result.item.dictionaryTagIvSum || 0;
+          else if (field === "bstsum") value = result.item.dictionaryTagBstSum || 0;
+          else if (field === "level") value = result.item.level || 0;
+          else if (field.endsWith("iv")) value = result.item.ivs[field.replace("iv", "")] || 0;
+          else if (result.item.bst) value = result.item.bst[field] || 0;
           
           switch(filter.operator) {
             case '>': return value > filter.value
@@ -5065,10 +5062,8 @@ document.getElementById("pokedex-search").addEventListener("keydown", e => {
       })
     }
 
-    //this dumbaah code expands the search to families during x conditions
     let shouldExpandFamilies = true;
-
-        if (numericFilters.length > 0) {
+    if (numericFilters.length > 0) {
       shouldExpandFamilies = false;
     }
 
@@ -5097,7 +5092,6 @@ document.getElementById("pokedex-search").addEventListener("keydown", e => {
       results.forEach(result => {
         const family = getEvolutionFamily(result.item);
         family.forEach(member => {
-          // only add if the member exists in the current fusePkmn index
           const memberInIndex = fusePkmn.getIndex().docs.find(doc => doc === member);
           if (memberInIndex) {
             expandedResults.add(member);
@@ -5106,14 +5100,10 @@ document.getElementById("pokedex-search").addEventListener("keydown", e => {
       });
       results = Array.from(expandedResults).map(item => ({ item }));
     } else {
-      //dont expand family
       expandedResults = new Set(results.map(r => r.item));
       results = Array.from(expandedResults).map(item => ({ item }));
     }
     
-    results = Array.from(expandedResults).map(item => ({ item }))
-    
-    // exclusions
     if (excludeTerms.length > 0) {
       let excludeSets = excludeTerms.map(term => {
         return new Set(fusePkmn.search(term).map(r => r.item))
@@ -5128,8 +5118,18 @@ document.getElementById("pokedex-search").addEventListener("keydown", e => {
     
     searchedPkmn = results
     updatePokedex()
+}
+
+document.getElementById("pokedex-search").addEventListener("input", e => {
+  pokedexSearch()
+});
+
+document.getElementById("pokedex-search").addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    document.getElementById("pokedex-search").blur()
   }
 });
+
 
 
 let fusePkmn;
@@ -5343,6 +5343,10 @@ if (sort !== "default") {
     sortedPokemon.sort((b, a) => {
         if (sort === "level")
             return a.level - b.level
+        if (sort === "ivsum")
+            return (a.dictionaryTagIvSum || 0) - (b.dictionaryTagIvSum || 0)
+        if (sort === "bstsum")
+            return (a.dictionaryTagBstSum || 0) - (b.dictionaryTagBstSum || 0)
         if (sort.endsWith("Total")) {
             const stat = sort.replace("Total", "")
             const aTotal = ((a.bst[stat] * 30) * Math.pow(1.1, a.ivs[stat]))
@@ -5382,6 +5386,10 @@ if (document.getElementById("pokedex-search").value!="") {
         sortedPokemon.sort((b, a) => {
             if (sort === "level")
                 return a.level - b.level
+            if (sort === "ivsum")
+                return (a.dictionaryTagIvSum || 0) - (b.dictionaryTagIvSum || 0)
+            if (sort === "bstsum")
+                return (a.dictionaryTagBstSum || 0) - (b.dictionaryTagBstSum || 0)
             if (sort.endsWith("Total")) {
                 const stat = sort.replace("Total", "")
                 const aTotal = ((a.bst[stat] * 30) * Math.pow(1.1, a.ivs[stat]))
@@ -9632,6 +9640,7 @@ function debugSetIvs(number){
         pkmn[i].ivs.sdef = number
         pkmn[i].ivs.satk = number
         pkmn[i].ivs.spe = number
+        pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
     }
 }
 

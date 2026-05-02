@@ -299,8 +299,7 @@ function setSearchTags() {
         if (pkmn[e].eggMove) pkmn[e].tagSignature = "eggMove"
 
         pkmn[e].dictionaryTagIvSum = pkmn[e].ivs.hp + pkmn[e].ivs.atk + pkmn[e].ivs.satk + pkmn[e].ivs.spe + pkmn[e].ivs.sdef + pkmn[e].ivs.def
-        pkmn[e].dictionaryTagBstSum = pkmn[e].ivs.hp + pkmn[e].ivs.atk + pkmn[e].ivs.satk + pkmn[e].ivs.spe + pkmn[e].ivs.sdef + pkmn[e].ivs.def
-
+        pkmn[e].dictionaryTagBstSum = pkmn[e].bst.hp + pkmn[e].bst.atk + pkmn[e].bst.satk + pkmn[e].bst.spe + pkmn[e].bst.sdef + pkmn[e].bst.def
     }
 }
 

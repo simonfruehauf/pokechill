@@ -837,7 +837,7 @@ function tooltipData(category, ttdata) {
 
 
         if (ttdata === `searchPokedex`) document.getElementById("tooltipTitle").innerHTML = `Keywords`
-        if (ttdata === `searchPokedex`) document.getElementById("tooltipBottom").innerHTML = `Operators:<br>![keyword]: Exclude from search<br>[keywordA] or [keywordB]: Search keywordA OR keywordB<br>[keywordA] [keywordB]: Search for keywordA AND keywordB<br><br>Keywords:<br>shiny, pokerus, signature, eggMove, [type], [ability], [hidden ability], [level], [move]<br>ivsum(< = >)[number]: Check sum of IVs (IE: ivsum<36)`
+        if (ttdata === `searchPokedex`) document.getElementById("tooltipBottom").innerHTML = `Operators:<br>![keyword]: Exclude from search<br>[keywordA] or [keywordB]: Search keywordA OR keywordB<br>[keywordA] [keywordB]: Search for keywordA AND keywordB<br><br>Keywords:<br>shiny, pokerus, signature, eggMove, [type], [ability], [hidden ability], [level], [move]<br><br>Numeric Filters:<br>[stat](< = >)[number]: Check for stat value<br>Stats: ivsum, bstsum, level, hp, atk, def, satk, sdef, spe, hpiv, atkiv, defiv, satkiv, sdefiv, speiv<br>(IE: ivsum>30, level=100, hp>120, hpiv=6)`
         if (ttdata === `searchPokedex`) document.getElementById("pokedex-search").blur()
 
         if (ttdata === `Main Challenges`) document.getElementById("tooltipTitle").innerHTML = `Main Challenges`
