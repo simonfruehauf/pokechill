@@ -1774,21 +1774,13 @@ function openMenu() {
 
 function updateMenuStreak() {
     const streak = saved.loginStreak || 1;
-    const rewards = [
-        { name: "Rare Candy", amount: 1, id: "rareCandy" },
-        { name: "Rare Candy", amount: 2, id: "rareCandy" },
-        { name: "Bottle Cap", amount: 1, id: "bottleCap" },
-        { name: "Rare Candy", amount: 3, id: "rareCandy" },
-        { name: "Bottle Cap", amount: 2, id: "bottleCap" },
-        { name: "Rare Candy", amount: 5, id: "rareCandy" },
-        { name: "Golden Bottle Cap", amount: 1, id: "goldenBottleCap" }
-    ];
-    
-    const reward = rewards[streak - 1];
-    const nextReward = streak < 7 ? rewards[streak] : rewards[0];
+    const reward = getDailyReward(streak);
+    const nextReward = getDailyReward(streak + 1);
 
     let streakHtml = `<div style="display: flex; justify-content: center; gap: 8px; margin-top: 0.5rem; margin-bottom: 0.5rem;">`;
-    for (let i = 1; i <= 7; i++) {
+    // If streak <= 7, show 1-7. If streak > 7, show the current "window"
+    const startDay = streak <= 7 ? 1 : streak - 6;
+    for (let i = startDay; i < startDay + 7; i++) {
         const active = i <= streak;
         const color = active ? "var(--light2)" : "var(--dark2)";
         const border = active ? "2px solid var(--light1)" : "1px solid var(--light1)";
@@ -1802,8 +1794,8 @@ function updateMenuStreak() {
             <strong>Daily Login Streak: Day ${streak}</strong>
             ${streakHtml}
             <div style="font-size: 0.8rem; opacity: 0.8;">
-                Today's Reward: x${reward.amount} ${reward.name}<br>
-                ${streak < 7 ? `Tomorrow: x${nextReward.amount} ${nextReward.name}` : "Streak Maxed! (Resets after Day 7)"}
+                Today: x${reward.amount} ${reward.name}<br>
+                Tomorrow: x${nextReward.amount} ${nextReward.name}
             </div>
         </div>
     `;
@@ -10084,7 +10076,7 @@ function checkDailyLogin() {
         saved.dailyRewardClaimed = false;
     } else if (dayNumber > saved.lastLoginDay) {
         if (dayNumber === saved.lastLoginDay + 1) {
-            saved.loginStreak = Math.min((saved.loginStreak || 0) + 1, 7);
+            saved.loginStreak = (saved.loginStreak || 0) + 1;
         } else {
             saved.loginStreak = 1;
         }
@@ -10097,26 +10089,42 @@ function checkDailyLogin() {
     }
 }
 
-function showDailyLoginReward() {
-    const streak = saved.loginStreak || 1;
+function getDailyReward(streak) {
     const rewards = [
         { name: "Rare Candy", amount: 1, id: "rareCandy" },
         { name: "Rare Candy", amount: 2, id: "rareCandy" },
-        { name: "Bottle Cap", amount: 10, id: "bottleCap" },
+        { name: "Bottle Cap", amount: 1, id: "bottleCap" },
         { name: "Rare Candy", amount: 3, id: "rareCandy" },
-        { name: "Bottle Cap", amount: 15, id: "bottleCap" },
+        { name: "Bottle Cap", amount: 2, id: "bottleCap" },
         { name: "Rare Candy", amount: 5, id: "rareCandy" },
-        { name: "Golden Bottle Cap", amount: 10, id: "goldenBottleCap" }
+        { name: "Golden Bottle Cap", amount: 1, id: "goldenBottleCap" }
     ];
 
-    const reward = rewards[streak - 1];
+    if (streak <= 7) {
+        return rewards[streak - 1];
+    } else {
+        // Day 8+: Alternates between 3 RC and 6 GBC
+        // Day 8 (even): 3 RC
+        // Day 9 (odd): 6 GBC
+        if (streak % 2 === 0) {
+            return { name: "Rare Candy", amount: 3, id: "rareCandy" };
+        } else {
+            return { name: "Golden Bottle Cap", amount: 6, id: "goldenBottleCap" };
+        }
+    }
+}
+
+function showDailyLoginReward() {
+    const streak = saved.loginStreak || 1;
+    const reward = getDailyReward(streak);
 
     document.getElementById("tooltipTop").style.display = "flex";
     document.getElementById("tooltipTop").innerHTML = `<img src="img/items/${reward.id}.png" style="scale:2">`;
     document.getElementById("tooltipTitle").innerHTML = `Daily Login Reward`;
 
     let streakHtml = `<div style="display: flex; justify-content: center; gap: 8px; margin-top: 1rem;">`;
-    for (let i = 1; i <= 7; i++) {
+    const startDay = streak <= 7 ? 1 : streak - 6;
+    for (let i = startDay; i < startDay + 7; i++) {
         const active = i <= streak;
         const color = active ? "var(--light2)" : "var(--dark2)";
         const border = active ? "2px solid var(--light1)" : "1px solid var(--light1)";
@@ -10139,17 +10147,7 @@ function showDailyLoginReward() {
 }
 
 function claimDailyLoginReward(streak) {
-    const rewards = [
-        { name: "Rare Candy", amount: 1, id: "rareCandy" },
-        { name: "Rare Candy", amount: 2, id: "rareCandy" },
-        { name: "Bottle Cap", amount: 1, id: "bottleCap" },
-        { name: "Rare Candy", amount: 3, id: "rareCandy" },
-        { name: "Bottle Cap", amount: 2, id: "bottleCap" },
-        { name: "Rare Candy", amount: 5, id: "rareCandy" },
-        { name: "Golden Bottle Cap", amount: 1, id: "goldenBottleCap" }
-    ];
-
-    const reward = rewards[streak - 1];
+    const reward = getDailyReward(streak);
     item[reward.id].got += reward.amount;
     saved.dailyRewardClaimed = true;
 
