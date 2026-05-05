@@ -840,11 +840,7 @@ function tooltipData(category, ttdata) {
         if (ttdata === `searchPokedex`) document.getElementById("tooltipBottom").innerHTML = `Operators:<br>![keyword]: Exclude from search<br>[keywordA] or [keywordB]: Search keywordA OR keywordB<br>[keywordA] [keywordB]: Search for keywordA AND keywordB<br><br>Keywords:<br>shiny, pokerus, signature, eggMove, [type], [ability], [hidden ability], [level], [move]<br><br>Numeric Filters:<br>[stat](< = >)[number]: Check for stat value<br>Stats: ivsum, bstsum, level, hp, atk, def, satk, sdef, spe, hpiv, atkiv, defiv, satkiv, sdefiv, speiv<br>(IE: ivsum>30, level=100, hp>120, hpiv=6)`
         if (ttdata === `searchPokedex`) document.getElementById("pokedex-search").blur()
 
-        if (ttdata === `Main Challenges`) document.getElementById("tooltipTitle").innerHTML = `Main Challenges`
-        if (ttdata === `Main Challenges`) document.getElementById("tooltipBottom").innerHTML = `Story-driven battles and curated challenges live here. More Main Challenges are coming soon.`
 
-        if (ttdata === `Custom Challenges`) document.getElementById("tooltipTitle").innerHTML = `Custom Challenges`
-        if (ttdata === `Custom Challenges`) document.getElementById("tooltipBottom").innerHTML = `Create custom battles from your own pools and enemy teams. Import and export challenge codes to share them.`
 
         if (ttdata === `ModHard`) document.getElementById("tooltipTitle").innerHTML = `Hard Mode`
         if (ttdata === `ModHard`) document.getElementById("tooltipBottom").innerHTML = `Trainers have twice the health. Only applies to VS Trainers`
@@ -1806,7 +1802,7 @@ function tooltipData(category, ttdata) {
         <div>Abilities</div>
         <div style="width:100%; height:100%; position:relative; display:flex;justify-content:start;align-items:center;flex-direction:column; max-height:25vh; overflow-y:scroll; padding-top:0.5rem;">${getAbilityPoolByTier(pkmn[ttdata])}</div>
         
-        <div onclick="window.getMoveset(pkmn.${ttdata})" class="custom-challenge-button" style="margin-top:0.5rem">Check learnable moves</div>
+        <div onclick="window.getMoveset(pkmn.${ttdata})" class="standard-button" style="margin-top:0.5rem">Check learnable moves</div>
 
 
         `

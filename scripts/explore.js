@@ -167,6 +167,7 @@ function givePkmn(poke, level) {
 
 
     updatePokedex();
+    pkmnWalkCandidates();
 }
 
 
@@ -6681,22 +6682,8 @@ function switchMenu(id) {
     }
 
 
-    /*
-
-    //document.getElementById(`custom-challenges-menu`).style.zIndex = "30"
 
 
-    if (id==="custom-challenges") {
-        if (saved.currentArea!==undefined) {openMenu(); return; }
-        document.getElementById(`custom-challenges-menu`).style.display = "flex"
-        document.getElementById(`custom-challenges-menu`).style.zIndex = "40"
-        if (typeof updateCustomChallenges === "function") updateCustomChallenges()
-    }
-
-    if (id!=="custom-challenges") document.getElementById(`custom-challenges-menu`).style.display = "none"    
-
-
-    */
 
     if (id !== "items") document.getElementById(`item-menu`).style.display = "none"
     if (id !== "dex") document.getElementById(`pokedex-menu`).style.display = "none"
@@ -9863,7 +9850,7 @@ function claimWonderTrade() {
 
     document.getElementById("tooltipMid").innerHTML = `Every 12h you might receive a random pokemon<br><span style="font-size:0.8rem; opacity:0.7">${poolInfo}</span>${historyHtml}`
     document.getElementById("tooltipBottom").innerHTML = `
-        <div onclick="wonderTrade()" class="custom-challenge-button" style="margin-top:0.5rem">Let's do it!</div>
+        <div onclick="wonderTrade()" class="standard-button" style="margin-top:0.5rem">Let's do it!</div>
     `
     openTooltip()
 
@@ -9977,6 +9964,7 @@ setInterval(() => {
 
 let walkingPkmn = []
 function pkmnWalkCandidates() {
+    walkingPkmn = []
     for (const i in pkmn) if (pkmn[i].caught > 0) walkingPkmn.push(i)
 }
 
@@ -9988,6 +9976,8 @@ function pkmnWalk() {
 
 
     if (saved.currentArea !== undefined) return
+    if (walkingPkmn.length == 0) pkmnWalkCandidates()
+    if (walkingPkmn.length == 0) return
 
 
 
@@ -10142,7 +10132,7 @@ function showDailyLoginReward() {
     `;
 
     document.getElementById("tooltipBottom").innerHTML = `
-        <div onclick="claimDailyLoginReward(${streak})" class="custom-challenge-button" style="margin-top:0.5rem">Claim Reward</div>
+        <div onclick="claimDailyLoginReward(${streak})" class="standard-button" style="margin-top:0.5rem">Claim Reward</div>
     `;
 
     openTooltip();
