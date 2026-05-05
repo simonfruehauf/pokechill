@@ -126,7 +126,7 @@ body {
     background: red;
     background-color: var(--dark2);
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px 10px;
-    overflow: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     background-image: url(img/bg/empty.jpg);
     background-position: bottom middle;
@@ -672,13 +672,26 @@ body {
 }
 
 .menu-button-open {
-    height: auto !important;
+    height: 100% !important;
     width: 100% !important;
-    border-radius: 0.3rem !important;
-    box-shadow: rgba(0, 0, 0, 0.4) 5px 0 5px;
-    max-height: 40rem;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    max-height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    position: fixed !important;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    overflow: visible !important;
+}
 
-
+@media (max-width: 1000px) {
+    .menu-button-open {
+        left: 0;
+        transform: none;
+    }
 }
 
 .menu-button-open #menu-items {
@@ -690,11 +703,13 @@ body {
     width: 100%;
     display: none;
     justify-content: center;
-    align-items: center;
+    align-content: flex-start;
+    align-items: start;
     padding: 1rem;
     flex-wrap: wrap;
     gap: 0.5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
+    flex-grow: 1;
 }
 
 #menu-button svg {
@@ -5570,6 +5585,8 @@ body {
     width: 100%;
     background: rgba(0, 0, 0, 0);
     position: absolute;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .pkmn-walk img {
@@ -5577,15 +5594,16 @@ body {
     animation: pkmn-active 0.5s infinite, pkmn-walk 30s 1 linear;
     image-rendering: pixelated;
     z-index: 0;
+    position: absolute;
 }
 
 @keyframes pkmn-walk {
     0% {
-        margin-left: -30%;
+        left: -30%;
     }
 
     100% {
-        margin-left: 130%;
+        left: 130%;
     }
 }
 
