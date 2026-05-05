@@ -634,15 +634,15 @@ item.goldenBottleCap = {
 item.timeCandy = {
     type: "key",
     usable: true,
-    effect: function () { if (afkSeconds <= 0 && saved.currentArea !== areas.frontierSpiralingTower.id && saved.currentArea !== undefined) { afkSeconds += 10 * 60; this.got--; updateItemBag() } else { document.getElementById("tooltipTop").style.display = "none"; document.getElementById("tooltipMid").style.display = "none"; document.getElementById("tooltipBottom").innerHTML = `Can't do that right now`; openTooltip() } },
-    info: function () { return `Use: Fast-forward battle time by 10 minutes. Must be used while battling` },
+    effect: function () { if (afkSeconds <= 0 && saved.currentArea !== areas.frontierSpiralingTower.id && saved.currentArea !== undefined) { afkSeconds += 15 * 60; this.got--; updateItemBag() } else { document.getElementById("tooltipTop").style.display = "none"; document.getElementById("tooltipMid").style.display = "none"; document.getElementById("tooltipBottom").innerHTML = `Can't do that right now`; openTooltip() } },
+    info: function () { return `Use: Fast-forward battle time by 15 minutes. Must be used while battling` },
 }
 
 item.timeCandyXL = {
     type: "key",
     usable: true,
-    effect: function () { if (afkSeconds <= 0 && saved.currentArea !== areas.frontierSpiralingTower.id && saved.currentArea !== undefined) { afkSeconds += 30 * 60; this.got--; updateItemBag() } else { document.getElementById("tooltipTop").style.display = "none"; document.getElementById("tooltipMid").style.display = "none"; document.getElementById("tooltipBottom").innerHTML = `Can't do that right now`; openTooltip() } },
-    info: function () { return `Use: Fast-forward battle time by 30 minutes. Must be used while battling` },
+    effect: function () { if (afkSeconds <= 0 && saved.currentArea !== areas.frontierSpiralingTower.id && saved.currentArea !== undefined) { afkSeconds += 60 * 60; this.got--; updateItemBag() } else { document.getElementById("tooltipTop").style.display = "none"; document.getElementById("tooltipMid").style.display = "none"; document.getElementById("tooltipBottom").innerHTML = `Can't do that right now`; openTooltip() } },
+    info: function () { return `Use: Fast-forward battle time by 1 hour. Must be used while battling` },
 }
 
 item.festivalTicket = {
