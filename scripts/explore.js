@@ -1520,6 +1520,11 @@ function updateWildPkmn() {
         // fixed colors for hp2, hp3...
         if (hpBars[i].color) {
             bar.style.background = hpBars[i].color;
+        } else {
+            const localPercent = ((percent - start) / segment) * 100;
+            if (localPercent > 60) bar.style.background = "rgb(130, 211, 130)"
+            if (localPercent < 60) bar.style.background = "rgba(221, 168, 99, 1)"
+            if (localPercent < 30) bar.style.background = "rgba(219, 112, 112, 1)"
         }
     }
 
