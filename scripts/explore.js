@@ -808,7 +808,7 @@ function exitCombat() {
 
 
 function leaveCombat(isManual) {
-    if (isManual && saved.gamemodIronman) {
+    if (isManual && saved.gamemodIronman && (areas[saved.currentArea].type == "vs" || areas[saved.currentArea].type == "frontier")) {
         document.getElementById("tooltipTop").style.display = "none";
         document.getElementById("tooltipTitle").style.display = "inline";
         document.getElementById("tooltipTitle").innerHTML = `Ironman Confirmation`;

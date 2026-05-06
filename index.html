@@ -21,7 +21,7 @@
         <div onclick="changeTheme('onyx')">Onyx Theme</div>
         <div onclick="changeTheme('oled')">Oled Theme</div>
     </div>
-    <div id="game-version">v5.11</div>
+    <div id="game-version">v5.13</div>
     <div id="main-content">
         <div id="item-menu" style="display: none;" class="season-background">
             <div class="item-menu-tags">
@@ -382,7 +382,8 @@
                         <line x1="12" y1="16" x2="12" y2="12"></line>
                         <line x1="12" y1="8" x2="12.01" y2="8"></line>
                     </svg>
-                    <div style="background: rgb(90, 133, 113); color: white; cursor: pointer;" id="pokedex-total">caught
+                    <div style="background: rgb(90, 133, 113); color: white; cursor: pointer;" id="pokedex-total">
+                        caught
                     </div>
                 </div>
             </div>
@@ -418,7 +419,8 @@
                         <option value="false">disabled</option>
                         <option value="true">enabled</option>
                     </select></div>
-                <div data-help="settingsAlternateWild" style="cursor: help;">Subtract 1 to current Wild Area rotation:
+                <div data-help="settingsAlternateWild" style="cursor: help;">Subtract 1 to current Wild Area
+                    rotation:
                     <select id="settings-alternate-rotation">
                         <option value="false">disabled</option>
                         <option value="true">enabled</option>
@@ -449,10 +451,12 @@
         <div id="disclaimer-menu" style="display: none;">
             This project is entirely unofficial!
             <br><br>
-            All characters and related intellectual property featured are the exclusive property of Nintendo, Creatures
+            All characters and related intellectual property featured are the exclusive property of Nintendo,
+            Creatures
             Inc., and The Pokémon Company.
             <br><br>
-            Any use of assets is solely for non-commercial and entertainment purposes. No ownership is claimed, and all
+            Any use of assets is solely for non-commercial and entertainment purposes. No ownership is claimed, and
+            all
             rights remain with their respective owners
             <br><br>
             Go play the official games!
@@ -472,13 +476,15 @@
                     onClick="document.getElementById('starter-menu').style.pointerEvents = 'none'; item.mysticWater.got++; givePkmn(pkmn.froakie,10); voidAnimation('starter-menu','tooltipBoxAppear 0.2s 1 reverse'); setTimeout(() => { document.getElementById('starter-menu').style.display = 'none' }, 150); ">
                     <img src="img/pkmn/sprite/froakie.png">Froakie<br>Water Type
                 </div>
-                <span style="color: white; background: transparent; padding: 0 2rem;">Tip: Right click (or long-press on
+                <span style="color: white; background: transparent; padding: 0 2rem;">Tip: Right click (or
+                    long-press on
                     mobile) on most elements for additional information</span>
             </div>
         </div>
         <div id="tutorial" style="display: none;">
             <img class="sprite-trim" src="img/pkmn/sprite/pikachuPhd.png">
-            <span id="tutorial-text">While in combat, Pokemon get tired and lose a very small fraction of their hp yada
+            <span id="tutorial-text">While in combat, Pokemon get tired and lose a very small fraction of their hp
+                yada
                 yada.</span>
         </div>
         <div id="guide-menu" style="display: none;">
@@ -884,7 +890,8 @@
                 <img id="wonder-ball" src="img/items/beastball.png">
                 <img id="wonder-pkmn" class="sprite-trim" src="img/pkmn/sprite/dialga.png">
                 <img src="img/resources/pkmn-shadow.png" style="opacity: 0.5; margin-bottom:7rem; margin-top: -5rem;">
-                <div id="wonder-text" onclick="document.getElementById('wonder-menu').style.display = 'none'">Thanks for
+                <div id="wonder-text" onclick="document.getElementById('wonder-menu').style.display = 'none'">Thanks
+                    for
                     the Dialga!</div>
             </div>
         </div>
@@ -1035,7 +1042,8 @@
                         d="M10.797 2.482a.61.61 0 0 1 0 .866L9.44 4.705h.924c1.393 0 2.305.572 2.845 1.343c.515.736.651 1.593.651 2.153c0 .561-.136 1.418-.651 2.154c-.54.77-1.452 1.342-2.845 1.342c-.948 0-1.695-.48-2.295-1.08c-.584-.584-1.093-1.347-1.56-2.046l-.019-.03c-.49-.734-.936-1.4-1.425-1.889c-.481-.48-.935-.721-1.429-.721c-1.01 0-1.54.39-1.84.82c-.327.466-.43 1.05-.43 1.45s.103.985.43 1.451c.3.43.83.82 1.84.82c.512 0 .982-.259 1.482-.775a.613.613 0 0 1 .88.852c-.612.632-1.379 1.148-2.362 1.148c-1.393 0-2.305-.571-2.845-1.342C.276 9.619.14 8.762.14 8.2s.137-1.418.651-2.153c.54-.77 1.452-1.343 2.845-1.343c.948 0 1.695.48 2.295 1.08c.584.585 1.093 1.348 1.56 2.047l.019.03c.49.734.936 1.4 1.425 1.889c.481.48.935.721 1.429.721c1.01 0 1.54-.39 1.84-.82c.327-.466.43-1.05.43-1.45s-.103-.986-.43-1.451c-.3-.43-.83-.82-1.84-.82H7.961a.613.613 0 0 1-.433-1.046L9.93 2.482a.61.61 0 0 1 .866 0"
                         clip-rule="evenodd" />
                 </svg>
-                Auto-Refight <span> (Requires an <img src="img/items/autoRefightTicket.png"> Auto-Refight Ticket)</span>
+                Auto-Refight <span> (Requires an <img src="img/items/autoRefightTicket.png"> Auto-Refight
+                    Ticket)</span>
             </div>
             <div id="battle-summary" class="leave-button" onClick='battleSummary();'>
                 <svg style="margin-right:0.3rem" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -1174,9 +1182,11 @@
                         </svg>
                     </div>
                     <span id="pkmn-stats-lore-info">
-                        Shaped by the Original One, when the universe was yet unmeasured, It was brought forth to give
+                        Shaped by the Original One, when the universe was yet unmeasured, It was brought forth to
+                        give
                         form to expanse. By its existence, space became vast; by its will, distance gained meaning.
-                        Without It, the world would have no breadth, no separation between sky and land, nor any path
+                        Without It, the world would have no breadth, no separation between sky and land, nor any
+                        path
                         for life to walk.
                     </span>
                 </div>
@@ -1382,10 +1392,9 @@
             </div>
         </div>
     </div>
-    </div>
     <script>
         (function () {
-            const VERSION = "5.11";
+            const VERSION = "5.13";
             const scripts = [
                 "scripts/HackTimer.js",
                 "scripts/fuse.js",
@@ -1407,18 +1416,18 @@
                 "scripts/save.js"
             ];
 
-            scripts.forEach(src => {
-                const s = document.createElement('script');
-                // Only add version to your own scripts, not external libs like HackTimer/fuse
-                const useVersion = !src.includes('HackTimer') && !src.includes('fuse');
-                s.src = src + (useVersion ? '?v=' + VERSION : '');
-                s.defer = true;
-                s.async = false; // Ensures scripts execute in the order they are added
-                document.body.appendChild(s);
-            });
-
-            // Also update the version display automatically
+            // Load scripts when DOM is ready to ensure elements exist
             window.addEventListener('DOMContentLoaded', () => {
+                scripts.forEach(src => {
+                    const s = document.createElement('script');
+                    // Only add version to your own scripts, not external libs like HackTimer/fuse
+                    const useVersion = !src.includes('HackTimer') && !src.includes('fuse');
+                    s.src = src + (useVersion ? '?v=' + VERSION : '');
+                    s.async = false; // Ensures scripts execute in the order they are added
+                    document.body.appendChild(s);
+                });
+
+                // Also update the version display automatically
                 const verEl = document.getElementById('game-version');
                 if (verEl) verEl.innerHTML = `v${VERSION}`;
             });

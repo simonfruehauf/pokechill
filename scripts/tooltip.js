@@ -801,7 +801,7 @@ function tooltipData(category, ttdata) {
 
         if (ttdata === `ModIronman`) {
             document.getElementById("tooltipTitle").innerHTML = `Ironman Mode`
-            document.getElementById("tooltipBottom").innerHTML = `In Ironman Mode, escaping or manually leaving a battle will result in all Pokémon in your active team being killed (marked as fainted/nuzlocked). This challenge tests your commitment to every encounter!`
+            document.getElementById("tooltipBottom").innerHTML = `In Ironman Mode, manually leaving a VS / Frontier battle will result in all Pokémon in your active team being killed (marked as fainted/nuzlocked). This challenge tests your commitment to every high-stakes encounter!`
         }
         if (ttdata === `ModNoIvTraining`) {
             document.getElementById("tooltipTitle").innerHTML = `No IV Training`
