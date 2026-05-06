@@ -632,7 +632,10 @@ function setWildPkmn() {
 
 
 
-    voidAnimation(`explore-wild-sprite`, `wildPokemonSpawn 0.5s 1`)
+    document.getElementById("explore-wild-sprite").style.opacity = "1";
+    document.getElementById("explore-wild-sprite").style.transform = "translateY(0)";
+
+    voidAnimation(`explore-wild-sprite`, `wildPokemonSpawn ${saved.gamemodSkipDeath ? 0 : 0.5}s 1`)
     updateWildPkmn()
 
 
