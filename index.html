@@ -1384,8 +1384,8 @@
     </div>
     </div>
     <script>
-        (function() {
-            const VERSION = "5.6";
+        (function () {
+            const VERSION = "5.8";
             const scripts = [
                 "scripts/HackTimer.js",
                 "scripts/fuse.js",
@@ -1409,7 +1409,7 @@
 
             scripts.forEach(src => {
                 const s = document.createElement('script');
-                // Only add version to your own scripts, not external libs like HackTimer/fuse if you prefer
+                // Only add version to your own scripts, not external libs like HackTimer/fuse
                 const useVersion = !src.includes('HackTimer') && !src.includes('fuse');
                 s.src = src + (useVersion ? '?v=' + VERSION : '');
                 s.defer = true;
