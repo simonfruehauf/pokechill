@@ -513,10 +513,10 @@ function newGameIntro() {
   setTimeout(() => {
     document.getElementById('disclaimer-menu').style.opacity = "0"
     document.getElementById('starter-menu').style.display = "flex"
-  }, 5000);
+  }, 3000);
   setTimeout(() => {
     document.getElementById('disclaimer-menu').style.display = "none"
-  }, 6000);
+  }, 3000);
 
 }
 
@@ -810,6 +810,10 @@ saved.gamemodHard = false
 saved.gamemodAfk = false
 saved.gamemodIvs = false
 saved.gamemodSpeed = false
+saved.gamemodNoIvTraining = false
+saved.gamemodNoMoveTraining = false
+saved.gamemodSkipDeath = false
+saved.gamemodIronman = false
 
 
 
@@ -820,6 +824,10 @@ const gameModifiers = [
   ['gamemodNuzlocke', 'checkbox-mode-nuzloke'],
   ['gamemodIvs', 'checkbox-mode-ivs'],
   ['gamemodSpeed', 'checkbox-mode-speed'],
+  ['gamemodNoIvTraining', 'checkbox-mode-no-iv-training'],
+  ['gamemodNoMoveTraining', 'checkbox-mode-no-move-training'],
+  ['gamemodSkipDeath', 'checkbox-mode-skip-death'],
+  ['gamemodIronman', 'checkbox-mode-ironman'],
 ];
 
 

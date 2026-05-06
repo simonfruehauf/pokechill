@@ -798,6 +798,24 @@ function tooltipData(category, ttdata) {
         if (ttdata === `BattleFactory`) document.getElementById("tooltipTitle").innerHTML = `Battle Factory`
         if (ttdata === `BattleFactory`) document.getElementById("tooltipBottom").innerHTML = `The Battle Factory is a challenge in which your goal is to deal the maximum amount of damage. Every turn you will take a fixed amount of damage, and damage from status effects is disabled.<br><br>Every time you enter the factory, your score will reset, but you can try as many times as you'd like<br><br>Your highest reached score will be saved, and reset when the league rotation changes. You will be rewarded for your highest score reached at the end of the battle<br><br>There is a maximum of 100 Golden Bottlecaps achievable`
         if (ttdata === `BattleFactory`) document.getElementById("tooltipMid").innerHTML = `<div id="area-preview-spawns" data-pkmn="${areas.frontierBattleFactory.icon.id}"><strong>Factory Pokemon</strong><img class="sprite-trim" src="img/pkmn/sprite/${areas.frontierBattleFactory.icon.id}.png"></div>`;
+
+        if (ttdata === `ModIronman`) {
+            document.getElementById("tooltipTitle").innerHTML = `Ironman Mode`
+            document.getElementById("tooltipBottom").innerHTML = `In Ironman Mode, escaping or manually leaving a battle will result in all Pokémon in your active team being killed (marked as fainted/nuzlocked). This challenge tests your commitment to every encounter!`
+        }
+        if (ttdata === `ModNoIvTraining`) {
+            document.getElementById("tooltipTitle").innerHTML = `No IV Training`
+            document.getElementById("tooltipBottom").innerHTML = `Disables all IV training modules. You must rely on catching Pokémon with good IVs naturally or using items.`
+        }
+        if (ttdata === `ModNoMoveTraining`) {
+            document.getElementById("tooltipTitle").innerHTML = `No Move Training`
+            document.getElementById("tooltipBottom").innerHTML = `Disables the Move training module. Pokémon can only learn moves through leveling up, TMs, or other natural methods.`
+        }
+        if (ttdata === `ModSkipDeath`) {
+            document.getElementById("tooltipTitle").innerHTML = `Skip Death Anim`
+            document.getElementById("tooltipBottom").innerHTML = `Removes the defeat animation and respawn delay for wild Pokémon, allowing for much faster grinding.`
+        }
+
         if (ttdata === `BattleFactory`) document.getElementById("tooltipMid").style.display = `inline`
 
         if (ttdata === `BattleArena`) document.getElementById("tooltipTitle").innerHTML = `Battle Arena`

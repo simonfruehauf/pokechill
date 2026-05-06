@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokechill</title>
     <link rel="icon" type="image/x-icon" href="/img/icons/icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=5.6">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
         <div onclick="changeTheme('onyx')">Onyx Theme</div>
         <div onclick="changeTheme('oled')">Oled Theme</div>
     </div>
-    <div id="game-version">v5.6</div>
+    <div id="game-version">v5.7</div>
     <div id="main-content">
         <div id="item-menu" style="display: none;" class="season-background">
             <div class="item-menu-tags">
@@ -339,6 +339,7 @@
                             <option value="atkTotal">atk Total</option>
                             <option value="ivsum">IV Sum</option>
                             <option value="bstsum">BST Sum</option>
+                            <option value="ivbstsum">IV + BST Sum</option>
                             <option value="defTotal">def Total</option>
                             <option value="satkTotal">satk Total</option>
                             <option value="sdefTotal">sdef Total</option>
@@ -430,7 +431,7 @@
                 <div onclick='document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").innerHTML = `Game Modifiers`
         document.getElementById("tooltipMid").style.display = `none`
-        document.getElementById("tooltipBottom").innerHTML = `Right Click/Long press to see the details<div id="tooltip-modifiers-list"><div style="pointer-events:none; background:#AD5957; color:white">Challenges</div> <div data-help="ModNuzloke"><span>Nuzloke Mode</span> <input type="checkbox" id="checkbox-mode-nuzloke" onclick="updateSettings(true)"></div>  <div data-help="ModHard"><span>Hard Mode</span> <input type="checkbox" id="checkbox-mode-hard" onclick="updateSettings(true)"></div> <div style="pointer-events:none; background:#57AD5D; color:white">Cheats</div>  <div data-help="ModNoIvs"><span>No IVs</span><input type="checkbox" id="checkbox-mode-ivs" onclick="updateSettings(true)"></div>  <div data-help="ModAfk"><span>Longer AFK</span><input type="checkbox" id="checkbox-mode-afk" onclick="updateSettings(true)"></div> <div data-help="ModSpeed"><span>5x Speed Boost</span><input type="checkbox" id="checkbox-mode-speed" onclick="updateSettings(true)"></div> </div>`
+        document.getElementById("tooltipBottom").innerHTML = `Right Click/Long press to see the details<div id="tooltip-modifiers-list"><div style="pointer-events:none; background:#AD5957; color:white">Challenges</div> <div data-help="ModNuzloke"><span>Nuzloke Mode</span> <input type="checkbox" id="checkbox-mode-nuzloke" onclick="updateSettings(true)"></div>  <div data-help="ModHard"><span>Hard Mode</span> <input type="checkbox" id="checkbox-mode-hard" onclick="updateSettings(true)"></div> <div data-help="ModIronman"><span>Ironman Mode</span> <input type="checkbox" id="checkbox-mode-ironman" onclick="updateSettings(true)"></div> <div data-help="ModNoIvTraining"><span>No IV Training</span> <input type="checkbox" id="checkbox-mode-no-iv-training" onclick="updateSettings(true)"></div> <div data-help="ModNoMoveTraining"><span>No Move Training</span> <input type="checkbox" id="checkbox-mode-no-move-training" onclick="updateSettings(true)"></div> <div style="pointer-events:none; background:#57AD5D; color:white">Cheats</div>  <div data-help="ModNoIvs"><span>No IVs</span><input type="checkbox" id="checkbox-mode-ivs" onclick="updateSettings(true)"></div>  <div data-help="ModAfk"><span>Longer AFK</span><input type="checkbox" id="checkbox-mode-afk" onclick="updateSettings(true)"></div> <div data-help="ModSpeed"><span>5x Speed Boost</span><input type="checkbox" id="checkbox-mode-speed" onclick="updateSettings(true)"></div> <div data-help="ModSkipDeath"><span>Skip Death Anim</span><input type="checkbox" id="checkbox-mode-skip-death" onclick="updateSettings(true)"></div> </div>`
         openTooltip(); updateSettings()'>Game modifiers</div>
                 <div onclick='document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").innerHTML = `Credits`
@@ -1372,7 +1373,7 @@
             <div id="auto-refight-info"
                 onclick='saved.autoRefight = false; document.getElementById("auto-refight-info").style.display = "none" '>
             </div>
-            <div id="explore-leave" onclick="saved.autoRefight = false; leaveCombat()">
+            <div id="explore-leave" onclick="saved.autoRefight = false; leaveCombat(true)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="white"
                         d="M5 5v14a1 1 0 0 0 1 1h3v-2H7V6h2V4H6a1 1 0 0 0-1 1m14.242-.97l-8-2A1 1 0 0 0 10 3v18a.998.998 0 0 0 1.242.97l8-2A1 1 0 0 0 20 19V5a1 1 0 0 0-.758-.97M15 12.188a1.001 1.001 0 0 1-2 0v-.377a1 1 0 1 1 2 .001z" />
@@ -1382,24 +1383,47 @@
         </div>
     </div>
     </div>
-    <script defer src="scripts/HackTimer.js"></script>
-    <script defer src="scripts/fuse.js"></script>
-    <script defer src="scripts/moveDictionary.js?v=5.6"></script>
-    <script defer src="scripts/itemDictionary.js?v=5.6"></script>
-    <script defer src="scripts/pkmnDictionary.js?v=5.6"></script>
-    <script defer src="scripts/areasDictionary.js?v=5.6"></script>
-    <script defer src="scripts/PR/autoTeamBuilding.js?v=5.6"></script>
-    <script defer src="scripts/PR/movesetGenerator.js?v=5.6"></script>
-    <script defer src="scripts/PR/teamDuplicate.js?v=5.6"></script>
-    <script defer src="scripts/PR/updateCheck.js?v=5.6"></script>
-    <script defer src="scripts/script.js?v=5.6"></script>
-    <script defer src="scripts/teams.js?v=5.6"></script>
-    <script defer src="scripts/explore.js?v=5.6"></script>
-    <script defer src="scripts/shop.js?v=5.6"></script>
-    <script defer src="scripts/dictionarySearch.js?v=5.6"></script>
-    <script defer src="scripts/tooltip.js?v=5.6"></script>
-    <script defer src="scripts/decor.js?v=5.6"></script>
-    <script defer src="scripts/save.js?v=5.6"></script>
+    <script>
+        (function() {
+            const VERSION = "5.6";
+            const scripts = [
+                "scripts/HackTimer.js",
+                "scripts/fuse.js",
+                "scripts/moveDictionary.js",
+                "scripts/itemDictionary.js",
+                "scripts/pkmnDictionary.js",
+                "scripts/areasDictionary.js",
+                "scripts/PR/autoTeamBuilding.js",
+                "scripts/PR/movesetGenerator.js",
+                "scripts/PR/teamDuplicate.js",
+                "scripts/PR/updateCheck.js",
+                "scripts/script.js",
+                "scripts/teams.js",
+                "scripts/explore.js",
+                "scripts/shop.js",
+                "scripts/dictionarySearch.js",
+                "scripts/tooltip.js",
+                "scripts/decor.js",
+                "scripts/save.js"
+            ];
+
+            scripts.forEach(src => {
+                const s = document.createElement('script');
+                // Only add version to your own scripts, not external libs like HackTimer/fuse if you prefer
+                const useVersion = !src.includes('HackTimer') && !src.includes('fuse');
+                s.src = src + (useVersion ? '?v=' + VERSION : '');
+                s.defer = true;
+                s.async = false; // Ensures scripts execute in the order they are added
+                document.body.appendChild(s);
+            });
+
+            // Also update the version display automatically
+            window.addEventListener('DOMContentLoaded', () => {
+                const verEl = document.getElementById('game-version');
+                if (verEl) verEl.innerHTML = `v${VERSION}`;
+            });
+        })();
+    </script>
 </body>
 
 </html>

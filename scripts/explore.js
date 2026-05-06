@@ -804,7 +804,19 @@ function exitCombat() {
 
 
 
-function leaveCombat() {
+function leaveCombat(isManual) {
+    if (isManual && saved.gamemodIronman) {
+        document.getElementById("tooltipTop").style.display = "none";
+        document.getElementById("tooltipTitle").style.display = "inline";
+        document.getElementById("tooltipTitle").innerHTML = `Ironman Confirmation`;
+        document.getElementById("tooltipMid").style.display = "inline";
+        document.getElementById("tooltipMid").innerHTML = `Leaving this fight will kill your active team. Are you sure?`;
+        document.getElementById("tooltipBottom").style.display = "inline";
+        document.getElementById("tooltipBottom").innerHTML = `<div onClick="executeIronmanLeave()" style="cursor:pointer; font-size:2rem; background: #AD5957; color: white; padding: 1rem; border-radius: 0.5rem; text-align:center" id="prevent-tooltip-exit">Confirm Leave</div>`;
+        openTooltip();
+        return;
+    }
+
 
 
     if (areas[saved.currentArea].hpPercentage) {
@@ -1306,6 +1318,28 @@ function leaveCombat() {
 
 }
 
+function executeIronmanLeave() {
+    closeTooltip();
+    if (saved.gamemodIronman) {
+        for (const slot in team) {
+            if (team[slot].pkmn) {
+                pkmn[team[slot].pkmn.id].nuzlocked = true;
+                team[slot].pkmn = undefined;
+                team[slot].item = undefined;
+            }
+        }
+        // Also clear from the currently active preview team to be sure
+        const currentTeam = saved.previewTeams[saved.currentPreviewTeam];
+        for (const slot in currentTeam) {
+            if (currentTeam[slot].pkmn) {
+                currentTeam[slot].pkmn = undefined;
+                currentTeam[slot].item = undefined;
+            }
+        }
+    }
+    leaveCombat(false);
+}
+
 storedAfkSeconds = 0 //this is used above
 
 saved.autoRefight = false
@@ -1402,6 +1436,7 @@ function updateWildPkmn() {
     if (saved.overrideBattleTimer != defaultPlayerMoveTimer) respawnTimer = 1
 
     if (afkSeconds > 0) respawnTimer = 0 //woomp woomp
+    if (saved.gamemodSkipDeath) respawnTimer = 0
 
 
 
@@ -1548,7 +1583,13 @@ function updateWildPkmn() {
         //document.getElementById(`pkmn-movebox-wild-${exploreCombatWildTurn}-bar`).style.width = "0%";
 
         document.getElementById("exploe-wild-hp").style.width = "0%";
-        voidAnimation(`explore-wild-sprite`, `wildPokemonDown ${respawnTimer + 1}s 1`)
+        if (saved.gamemodSkipDeath) document.getElementById("exploe-wild-hp").style.transition = "0s"
+        if (!saved.gamemodSkipDeath) {
+            voidAnimation(`explore-wild-sprite`, `wildPokemonDown ${respawnTimer + 1}s 1`)
+        } else {
+            document.getElementById("explore-wild-sprite").style.opacity = "0";
+            document.getElementById("explore-wild-sprite").style.transform = "translateY(1rem)";
+        }
 
 
 
@@ -5382,6 +5423,8 @@ function updatePokedex() {
                 return (a.dictionaryTagIvSum || 0) - (b.dictionaryTagIvSum || 0)
             if (sort === "bstsum")
                 return (a.dictionaryTagBstSum || 0) - (b.dictionaryTagBstSum || 0)
+            if (sort === "ivbstsum")
+                return ((a.dictionaryTagIvSum || 0) + (a.dictionaryTagBstSum || 0)) - ((b.dictionaryTagIvSum || 0) + (b.dictionaryTagBstSum || 0))
             if (sort.endsWith("Total")) {
                 const stat = sort.replace("Total", "")
                 const aTotal = ((a.bst[stat] * 30) * Math.pow(1.1, a.ivs[stat]))
@@ -5425,6 +5468,8 @@ function updatePokedex() {
                 return (a.dictionaryTagIvSum || 0) - (b.dictionaryTagIvSum || 0)
             if (sort === "bstsum")
                 return (a.dictionaryTagBstSum || 0) - (b.dictionaryTagBstSum || 0)
+            if (sort === "ivbstsum")
+                return ((a.dictionaryTagIvSum || 0) + (a.dictionaryTagBstSum || 0)) - ((b.dictionaryTagIvSum || 0) + (b.dictionaryTagBstSum || 0))
             if (sort.endsWith("Total")) {
                 const stat = sort.replace("Total", "")
                 const aTotal = ((a.bst[stat] * 30) * Math.pow(1.1, a.ivs[stat]))
@@ -9389,6 +9434,8 @@ function setTrainingMenu() {
         div.style.borderColor = training[i].color
         div.dataset.training = i
         if (training[i].condition && training[i].condition() != true) div.style.filter = "brightness(0.5)"
+        if (saved.gamemodNoIvTraining && /iv1|iv2|iv3/.test(i)) div.style.filter = "brightness(0.5)"
+        if (saved.gamemodNoMoveTraining && i === "move") div.style.filter = "brightness(0.5)"
 
         div.innerHTML = `
     <span>${training[i].name}</span>
@@ -9403,6 +9450,24 @@ function setTrainingMenu() {
 
 
         div.addEventListener("click", e => {
+
+            if (saved.gamemodNoIvTraining && /iv1|iv2|iv3/.test(i)) {
+                document.getElementById("tooltipTop").style.display = "none"
+                document.getElementById("tooltipBottom").style.display = "none"
+                document.getElementById("tooltipTitle").innerHTML = `No IV Training`
+                document.getElementById("tooltipMid").innerHTML = `IV training is disabled by the game modifier!`
+                openTooltip()
+                return
+            }
+
+            if (saved.gamemodNoMoveTraining && i === "move") {
+                document.getElementById("tooltipTop").style.display = "none"
+                document.getElementById("tooltipBottom").style.display = "none"
+                document.getElementById("tooltipTitle").innerHTML = `No Move Training`
+                document.getElementById("tooltipMid").innerHTML = `Move training is disabled by the game modifier!`
+                openTooltip()
+                return
+            }
 
 
             if (training[i].condition && training[i].condition() != true && training[i].errorText) {
