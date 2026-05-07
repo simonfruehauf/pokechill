@@ -6136,7 +6136,7 @@ function updateEditorTags() {
     if (pkmn[currentEditedPkmn].tagList?.length > 0) {
         document.getElementById(`tag-system-editor-tags`).innerHTML = `` // Has tags, show nothing
     } else {
-        document.getElementById(`tag-system-editor-tags`).innerHTML = `Click here to add tags` // No tags, show prompt
+        document.getElementById(`tag-system-editor-tags`).innerHTML = `Add Tags` // No tags, show prompt
         return
     }
 

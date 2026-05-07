@@ -962,6 +962,23 @@ body {
     gap: 5px;
 }
 
+@media (max-width: 500px) {
+    .pkmn-stats-panel-bst {
+
+        gap: 2px;
+        font-size: 0.8rem;
+    }
+
+    .editor-stat-number {
+        min-width: 3rem;
+        font-size: 0.8rem;
+    }
+
+    .editor-stat-iv-bonus {
+        font-size: 0.7rem;
+    }
+}
+
 .pkmn-stats-panel-bst span {
     width: 10px;
     display: flex;
@@ -998,10 +1015,23 @@ body {
 }
 
 .editor-stat-number {
-    width: 1.6rem;
+    width: max-content;
+    height: 100%;
+    min-width: 4rem;
     text-align: end !important;
     justify-content: end !important;
-    margin-right: -2px;
+    margin-right: 2px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.editor-stat-iv-bonus {
+    color: #F4607C;
+    font-size: 0.75rem;
+    opacity: 0.9;
+    width: auto !important;
 }
 
 .pkmn-stats-panel-info .explore-sprite {
@@ -1375,6 +1405,7 @@ body {
 
 .pkmn-editor-side {
     background: var(--dark2);
+    height: 100%;
     width: 55%;
     max-width: 15rem;
     overflow: hidden;
@@ -1384,7 +1415,7 @@ body {
 
 .pkmn-editor-side-2 {
     background: transparent;
-    width: 45%;
+    width: 50%;
     max-width: 15rem;
     display: flex;
     justify-content: start;
@@ -6728,7 +6759,7 @@ body {
 #tag-system-editor-tags {
     font-size: 1rem;
     padding: 0 0rem;
-    height: 2rem;
+    height: 1.5rem;
     background: var(--light2);
     color: var(--dark1);
     border-radius: 0.2rem;
