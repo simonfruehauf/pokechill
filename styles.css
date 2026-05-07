@@ -936,6 +936,7 @@ body {
 
 
 .pkmn-stats-panel {
+    outline: none !important;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -988,6 +988,7 @@ function tooltipData(category, ttdata) {
 
         document.getElementById("tooltipTop").style.display = "none";
         document.getElementById("tooltipTitle").style.display = "none";
+        refreshPkmnSortTags(ttdata)
         if (pkmn[ttdata].ability == undefined) pkmn[ttdata].ability = learnPkmnAbility(pkmn[ttdata].id)
         let activeAbility = format(pkmn[ttdata].ability)
         let hiddenAbility = ""
@@ -1112,6 +1113,7 @@ function tooltipData(category, ttdata) {
 
 
         const poke = pkmn[ttdata]
+        refreshPkmnSortTags(ttdata)
 
         voidAnimation("pkmn-editor", "tooltipBoxAppear 0.2s 1")
         document.getElementById("pkmn-editor").style.display = "flex"

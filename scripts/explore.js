@@ -1086,9 +1086,7 @@ function leaveCombat(isManual) {
                 if (newIv > ivId) {
                     pkmn[hatchedPkmn].ivs[iv] = newIv
                     divTag = `<span>Ivs Up!</span>`
-                    pkmn[hatchedPkmn].dictionaryTagIvSum = pkmn[hatchedPkmn].ivs.hp + pkmn[hatchedPkmn].ivs.atk + pkmn[hatchedPkmn].ivs.satk + pkmn[hatchedPkmn].ivs.spe + pkmn[hatchedPkmn].ivs.sdef + pkmn[hatchedPkmn].ivs.def
-                    pkmn[hatchedPkmn].dictionaryTagBstSum = pkmn[hatchedPkmn].bst.hp + pkmn[hatchedPkmn].bst.atk + pkmn[hatchedPkmn].bst.satk + pkmn[hatchedPkmn].bst.spe + pkmn[hatchedPkmn].bst.sdef + pkmn[hatchedPkmn].bst.def
-
+                    refreshPkmnSortTags(hatchedPkmn)
                 }
             }
 
@@ -1103,7 +1101,7 @@ function leaveCombat(isManual) {
 
             if (rng(shinyPkmnChance) && pkmn[hatchedPkmn].shiny != true) { //shiny
                 pkmn[hatchedPkmn].shiny = true
-                divTag = `<span>✦Shiny✦!</span>`
+                divTag = `<span>✦Shiny✦</span>`
             }
 
             if (pkmn[hatchedPkmn].shiny == true && giveStarsign(hatchedPkmn, `check`) != "complete" && rng(1 / 4000)) { //starsign
@@ -1121,7 +1119,7 @@ function leaveCombat(isManual) {
             if (saved.hideGotPkmn == "true" && divTag == "") continue
 
             divPkmn.innerHTML = `<img class="sprite-trim" src="img/pkmn/sprite/${hatchedPkmn}.png">` + divTag;
-            if (divTag == `<span>✦Shiny✦!</span>`) divPkmn.innerHTML = `<img class="sprite-trim" src="img/pkmn/shiny/${hatchedPkmn}.png">` + divTag;
+            if (divTag == `<span>✦Shiny✦</span>`) divPkmn.innerHTML = `<img class="sprite-trim" src="img/pkmn/shiny/${hatchedPkmn}.png">` + divTag;
             document.getElementById("area-end-pkmn-list").appendChild(divPkmn);
 
             noPkmn = false
@@ -1153,9 +1151,7 @@ function leaveCombat(isManual) {
             if (newIv > ivId) {
                 pkmn[i].ivs[iv] = newIv
                 divTag = `<span>Iv's Up!</span>`
-                pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
-                pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
-
+                refreshPkmnSortTags(i)
             }
         }
 
@@ -1170,7 +1166,7 @@ function leaveCombat(isManual) {
 
         if (rng(shinyPkmnChanceEncounter)) { //shiny
             pkmn[i].shiny = true
-            divTag = `<span>✦Shiny✦!</span>`
+            divTag = `<span>✦Shiny✦</span>`
         }
 
         if (pkmn[i].shiny == true && giveStarsign(i, `check`) != "complete" && rng(1 / 1200)) { //starsign
@@ -1195,7 +1191,7 @@ function leaveCombat(isManual) {
 
 
         divPkmn.innerHTML = `<img class="sprite-trim" src="img/pkmn/sprite/${i}.png">` + divTag;
-        if (divTag == `<span>✦Shiny✦!</span>`) divPkmn.innerHTML = `<img class="sprite-trim" src="img/pkmn/shiny/${i}.png">` + divTag;
+        if (divTag == `<span>✦Shiny✦</span>`) divPkmn.innerHTML = `<img class="sprite-trim" src="img/pkmn/shiny/${i}.png">` + divTag;
         document.getElementById("area-end-pkmn-list").appendChild(divPkmn);
 
 
@@ -2142,6 +2138,14 @@ function returnStatDots(id, stat) {
 
     if (val === max) return stars;
     return stars + empty;
+}
+
+function returnPkmnStatValue(pokemon, stat) {
+    let stars = pokemon.bst?.[stat] || 0;
+    if (pokemon.nature && nature[pokemon.nature] && nature[pokemon.nature][stat]) {
+        stars += nature[pokemon.nature][stat];
+    }
+    return (stars * 30) * Math.pow(1.1, pokemon.ivs?.[stat] || 0);
 }
 
 
@@ -5129,11 +5133,11 @@ function pokedexSearch() {
             return numericFilters.every(filter => {
                 let value = 0;
                 const field = filter.field;
-                if (field === "ivsum") value = result.item.dictionaryTagIvSum || 0;
-                else if (field === "bstsum") value = result.item.dictionaryTagBstSum || 0;
-                else if (field === "level") value = result.item.level || 0;
-                else if (field.endsWith("iv")) value = result.item.ivs[field.replace("iv", "")] || 0;
-                else if (result.item.bst) value = result.item.bst[field] || 0;
+                if (field === "ivsum") value = result.item.dictionaryTagIvSum ?? 0;
+                else if (field === "bstsum") value = result.item.dictionaryTagBstSum ?? 0;
+                else if (field === "level") value = result.item.level ?? 0;
+                else if (field.endsWith("iv")) value = result.item.ivs[field.replace("iv", "")] ?? 0;
+                else if (result.item.bst) value = result.item.bst[field] ?? 0;
 
                 switch (filter.operator) {
                     case '>': return value > filter.value
@@ -5430,15 +5434,15 @@ function updatePokedex() {
             if (sort === "level")
                 return a.level - b.level
             if (sort === "ivsum")
-                return (a.dictionaryTagIvSum || 0) - (b.dictionaryTagIvSum || 0)
+                return (a.dictionaryTagIvSum ?? 0) - (b.dictionaryTagIvSum ?? 0)
             if (sort === "bstsum")
-                return (a.dictionaryTagBstSum || 0) - (b.dictionaryTagBstSum || 0)
+                return (a.dictionaryTagBstSum ?? 0) - (b.dictionaryTagBstSum ?? 0)
             if (sort === "ivbstsum")
-                return ((a.dictionaryTagIvSum || 0) + (a.dictionaryTagBstSum || 0)) - ((b.dictionaryTagIvSum || 0) + (b.dictionaryTagBstSum || 0))
+                return ((a.dictionaryTagIvSum ?? 0) + (a.dictionaryTagBstSum ?? 0)) - ((b.dictionaryTagIvSum ?? 0) + (b.dictionaryTagBstSum ?? 0))
             if (sort.endsWith("Total")) {
                 const stat = sort.replace("Total", "")
-                const aTotal = ((a.bst[stat] * 30) * Math.pow(1.1, a.ivs[stat]))
-                const bTotal = ((b.bst[stat] * 30) * Math.pow(1.1, b.ivs[stat]))
+                const aTotal = returnPkmnStatValue(a, stat)
+                const bTotal = returnPkmnStatValue(b, stat)
                 return aTotal - bTotal
             }
             if (sort.endsWith("Bst")) {
@@ -5475,15 +5479,15 @@ function updatePokedex() {
             if (sort === "level")
                 return a.level - b.level
             if (sort === "ivsum")
-                return (a.dictionaryTagIvSum || 0) - (b.dictionaryTagIvSum || 0)
+                return (a.dictionaryTagIvSum ?? 0) - (b.dictionaryTagIvSum ?? 0)
             if (sort === "bstsum")
-                return (a.dictionaryTagBstSum || 0) - (b.dictionaryTagBstSum || 0)
+                return (a.dictionaryTagBstSum ?? 0) - (b.dictionaryTagBstSum ?? 0)
             if (sort === "ivbstsum")
-                return ((a.dictionaryTagIvSum || 0) + (a.dictionaryTagBstSum || 0)) - ((b.dictionaryTagIvSum || 0) + (b.dictionaryTagBstSum || 0))
+                return ((a.dictionaryTagIvSum ?? 0) + (a.dictionaryTagBstSum ?? 0)) - ((b.dictionaryTagIvSum ?? 0) + (b.dictionaryTagBstSum ?? 0))
             if (sort.endsWith("Total")) {
                 const stat = sort.replace("Total", "")
-                const aTotal = ((a.bst[stat] * 30) * Math.pow(1.1, a.ivs[stat]))
-                const bTotal = ((b.bst[stat] * 30) * Math.pow(1.1, b.ivs[stat]))
+                const aTotal = returnPkmnStatValue(a, stat)
+                const bTotal = returnPkmnStatValue(b, stat)
                 return aTotal - bTotal
             }
             if (sort.endsWith("Bst")) {
@@ -5666,8 +5670,7 @@ function updatePokedex() {
 
                 pkmn[i].ivs[statToRise]++
                 item[vitaminToUse].got--
-                pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
-                pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
+                refreshPkmnSortTags(i)
                 updatePokedex()
 
                 if (item[vitaminToUse].got <= 0) {
@@ -9001,8 +9004,6 @@ function setGeneticMenu(mod, itemUsed) {
         if (rng(ivChanceSdef) && pkmn[saved.geneticHost].ivs.sdef < Math.min(ivCap, pkmn[saved.geneticSample].ivs.sdef)) { pkmn[saved.geneticHost].ivs.sdef = Math.min(ivCap, pkmn[saved.geneticSample].ivs.sdef); summaryTags += `<div style="filter:hue-rotate(200deg)">❖ Special Defense Iv's inherited!</div>` }
         if (rng(ivChanceSpe) && pkmn[saved.geneticHost].ivs.spe < Math.min(ivCap, pkmn[saved.geneticSample].ivs.spe)) { pkmn[saved.geneticHost].ivs.spe = Math.min(ivCap, pkmn[saved.geneticSample].ivs.spe); summaryTags += `<div style="filter:hue-rotate(200deg)">❖ Speed Iv's inherited!</div>` }
 
-        pkmn[saved.geneticHost].dictionaryTagIvSum = pkmn[saved.geneticHost].ivs.hp + pkmn[saved.geneticHost].ivs.atk + pkmn[saved.geneticHost].ivs.satk + pkmn[saved.geneticHost].ivs.spe + pkmn[saved.geneticHost].ivs.sdef + pkmn[saved.geneticHost].ivs.def
-        pkmn[saved.geneticHost].dictionaryTagBstSum = pkmn[saved.geneticHost].bst.hp + pkmn[saved.geneticHost].bst.atk + pkmn[saved.geneticHost].bst.satk + pkmn[saved.geneticHost].bst.spe + pkmn[saved.geneticHost].bst.sdef + pkmn[saved.geneticHost].bst.def
 
 
 
@@ -9030,6 +9031,8 @@ function setGeneticMenu(mod, itemUsed) {
                 if (iv === "spe") summaryTags += `<div style="filter:hue-rotate(250deg)">◆ Speed Iv's increased!</div>`
             }
         }
+
+        refreshPkmnSortTags(saved.geneticHost)
 
 
         if (summaryTags == "") summaryTags = "No new genetic changes"
@@ -9178,8 +9181,7 @@ training.iv1 = { //disapears if you have more than x ivs
 
         let text = `Increased ${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}!`
         if (parts.length === 1) text = `Increased ${parts[0]}!`;
-        pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
-        pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
+        refreshPkmnSortTags(i)
 
         setTimeout(() => {
             const div = document.createElement("span");
@@ -9233,8 +9235,7 @@ training.iv2 = { //doesnt appear until you have more than x ivs
 
         let text = `Increased ${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}!`
         if (parts.length === 1) text = `Increased ${parts[0]}!`;
-        pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
-        pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
+        refreshPkmnSortTags(i)
 
         setTimeout(() => {
             const div = document.createElement("span");
@@ -9288,8 +9289,7 @@ training.iv3 = { //doesnt appear until you have more than x ivs
 
         let text = `Increased ${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}!`
         if (parts.length === 1) text = `Increased ${parts[0]}!`;
-        pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
-        pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
+        refreshPkmnSortTags(i)
 
         setTimeout(() => {
             const div = document.createElement("span");
@@ -9741,8 +9741,7 @@ function debugSetIvs(number) {
         pkmn[i].ivs.sdef = number
         pkmn[i].ivs.satk = number
         pkmn[i].ivs.spe = number
-        pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
-        pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
+        refreshPkmnSortTags(i)
     }
 }
 
