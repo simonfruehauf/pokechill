@@ -1087,6 +1087,7 @@ function leaveCombat(isManual) {
                     pkmn[hatchedPkmn].ivs[iv] = newIv
                     divTag = `<span>Ivs Up!</span>`
                     pkmn[hatchedPkmn].dictionaryTagIvSum = pkmn[hatchedPkmn].ivs.hp + pkmn[hatchedPkmn].ivs.atk + pkmn[hatchedPkmn].ivs.satk + pkmn[hatchedPkmn].ivs.spe + pkmn[hatchedPkmn].ivs.sdef + pkmn[hatchedPkmn].ivs.def
+                    pkmn[hatchedPkmn].dictionaryTagBstSum = pkmn[hatchedPkmn].bst.hp + pkmn[hatchedPkmn].bst.atk + pkmn[hatchedPkmn].bst.satk + pkmn[hatchedPkmn].bst.spe + pkmn[hatchedPkmn].bst.sdef + pkmn[hatchedPkmn].bst.def
 
                 }
             }
@@ -1153,6 +1154,7 @@ function leaveCombat(isManual) {
                 pkmn[i].ivs[iv] = newIv
                 divTag = `<span>Iv's Up!</span>`
                 pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
+                pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
 
             }
         }
@@ -5665,6 +5667,7 @@ function updatePokedex() {
                 pkmn[i].ivs[statToRise]++
                 item[vitaminToUse].got--
                 pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
+                pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
                 updatePokedex()
 
                 if (item[vitaminToUse].got <= 0) {
@@ -8999,6 +9002,7 @@ function setGeneticMenu(mod, itemUsed) {
         if (rng(ivChanceSpe) && pkmn[saved.geneticHost].ivs.spe < Math.min(ivCap, pkmn[saved.geneticSample].ivs.spe)) { pkmn[saved.geneticHost].ivs.spe = Math.min(ivCap, pkmn[saved.geneticSample].ivs.spe); summaryTags += `<div style="filter:hue-rotate(200deg)">❖ Speed Iv's inherited!</div>` }
 
         pkmn[saved.geneticHost].dictionaryTagIvSum = pkmn[saved.geneticHost].ivs.hp + pkmn[saved.geneticHost].ivs.atk + pkmn[saved.geneticHost].ivs.satk + pkmn[saved.geneticHost].ivs.spe + pkmn[saved.geneticHost].ivs.sdef + pkmn[saved.geneticHost].ivs.def
+        pkmn[saved.geneticHost].dictionaryTagBstSum = pkmn[saved.geneticHost].bst.hp + pkmn[saved.geneticHost].bst.atk + pkmn[saved.geneticHost].bst.satk + pkmn[saved.geneticHost].bst.spe + pkmn[saved.geneticHost].bst.sdef + pkmn[saved.geneticHost].bst.def
 
 
 
@@ -9175,6 +9179,7 @@ training.iv1 = { //disapears if you have more than x ivs
         let text = `Increased ${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}!`
         if (parts.length === 1) text = `Increased ${parts[0]}!`;
         pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
+        pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
 
         setTimeout(() => {
             const div = document.createElement("span");
@@ -9229,6 +9234,7 @@ training.iv2 = { //doesnt appear until you have more than x ivs
         let text = `Increased ${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}!`
         if (parts.length === 1) text = `Increased ${parts[0]}!`;
         pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
+        pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
 
         setTimeout(() => {
             const div = document.createElement("span");
@@ -9283,6 +9289,7 @@ training.iv3 = { //doesnt appear until you have more than x ivs
         let text = `Increased ${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}!`
         if (parts.length === 1) text = `Increased ${parts[0]}!`;
         pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
+        pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
 
         setTimeout(() => {
             const div = document.createElement("span");
@@ -9735,6 +9742,7 @@ function debugSetIvs(number) {
         pkmn[i].ivs.satk = number
         pkmn[i].ivs.spe = number
         pkmn[i].dictionaryTagIvSum = pkmn[i].ivs.hp + pkmn[i].ivs.atk + pkmn[i].ivs.satk + pkmn[i].ivs.spe + pkmn[i].ivs.sdef + pkmn[i].ivs.def
+        pkmn[i].dictionaryTagBstSum = pkmn[i].bst.hp + pkmn[i].bst.atk + pkmn[i].bst.satk + pkmn[i].bst.spe + pkmn[i].bst.sdef + pkmn[i].bst.def
     }
 }
 
