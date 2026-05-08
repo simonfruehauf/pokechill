@@ -277,11 +277,27 @@ body {
 .explore-hp {
     width: 100%;
     height: 0.5rem;
+    margin-bottom: 2px;
     background: rgb(130, 211, 130);
     border-radius: 0.1rem;
     transition: 0.5s all;
     flex-shrink: 0;
 
+}
+
+.explore-type-icons {
+    display: flex;
+    gap: 0.2rem;
+    flex-shrink: 0;
+    min-width: 2.6rem;
+    justify-content: flex-end;
+}
+
+.explore-type-icon {
+    height: 1.2rem;
+    width: 1.2rem;
+    border-radius: 0.2rem;
+    padding: 0.1rem;
 }
 
 .explore-hp-wild {

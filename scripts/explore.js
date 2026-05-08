@@ -542,6 +542,8 @@ function setWildPkmn() {
 
 
     document.getElementById("explore-wild-name").innerHTML = format(spawnedPkmn) + ` <span class="explore-pkmn-level" > lvl ${wildLevel} </span>`
+    const wildTypes = pkmn[spawnedPkmn].type;
+    document.getElementById("explore-wild-types").innerHTML = wildTypes.map(t => `<img class="explore-type-icon" style="background: ${returnTypeColor(t)}" src="img/icons/${t}.svg">`).join('');
     document.getElementById("explore-wild-sprite").src = `img/pkmn/sprite/${spawnedPkmn}.png`
 
     if (pkmn[spawnedPkmn].float) document.getElementById("explore-wild-sprite").classList.add(`floating-pkmn`)

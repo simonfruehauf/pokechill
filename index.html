@@ -21,7 +21,7 @@
         <div onclick="changeTheme('onyx')">Onyx Theme</div>
         <div onclick="changeTheme('oled')">Oled Theme</div>
     </div>
-    <div id="game-version">v5.16</div>
+    <div id="game-version">v5.17</div>
     <div id="main-content">
         <div id="item-menu" style="display: none;" class="season-background">
             <div class="item-menu-tags">
@@ -1361,14 +1361,17 @@
                     <div class="explore-header-infobox">
                         <div class="explore-header-hpbox">
                             <span style="color: white;" id="explore-wild-name"></span>
-                            <div style="position: relative; height: 0.5rem; width: 100%;">
-                                <div class="explore-hp-wild" id="exploe-wild-hp"></div>
-                                <div style="background: rgb(134, 141, 238);" class="explore-hp-wild"
-                                    id="exploe-wild-hp-2"></div>
-                                <div style="background: rgb(221, 134, 238);" class="explore-hp-wild"
-                                    id="exploe-wild-hp-3"></div>
-                                <div style="background: rgb(221, 134, 238);" class="explore-hp-wild"
-                                    id="exploe-wild-hp-4"></div>
+                            <div style="display: flex; align-items: center; gap: 0.3rem; width: 100%;">
+                                <div style="position: relative; height: 0.5rem; width: 100%;">
+                                    <div class="explore-hp-wild" id="exploe-wild-hp"></div>
+                                    <div style="background: rgb(134, 141, 238);" class="explore-hp-wild"
+                                        id="exploe-wild-hp-2"></div>
+                                    <div style="background: rgb(221, 134, 238);" class="explore-hp-wild"
+                                        id="exploe-wild-hp-3"></div>
+                                    <div style="background: rgb(221, 134, 238);" class="explore-hp-wild"
+                                        id="exploe-wild-hp-4"></div>
+                                </div>
+                                <div id="explore-wild-types" class="explore-type-icons"></div>
                             </div>
                         </div>
                         <div class="explore-header-moves" id="explore-header-moves-wild">
@@ -1394,7 +1397,7 @@
     </div>
     <script>
         (function () {
-            const VERSION = "5.16";
+            const VERSION = "5.17";
             const scripts = [
                 "scripts/HackTimer.js",
                 "scripts/fuse.js",

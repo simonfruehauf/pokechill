@@ -734,6 +734,8 @@ function setPkmnTeam(){
                     style="position: absolute; left: ${decorData.x}px; top: ${decorData.y}px; pointer-events: none;">`
     }
 
+    const pkmnTypes = pkmn[team[i].pkmn.id].type;
+    const typeIconsHtml = pkmnTypes.map(t => `<img class="explore-type-icon" style="background: ${returnTypeColor(t)}" src="img/icons/${t}.svg">`).join('');
 
     div.innerHTML = `
     <div class="team-held-item" id="team-${i}-held-item"></div>
@@ -748,15 +750,18 @@ function setPkmnTeam(){
                 <img class="explore-team-member-flair" src="img/icons/pokeball.svg">
                 <div class="explore-header-hpbox">
                 <span style="color: white;">${pkmnName}</span>
-                <div class="explore-hp" id="explore-${i}-hp"></div>
-                <div class="explore-hp" style="background:#7ed0f0ff;" id="explore-${i}-exp"></div>
+                <div style="display: flex; align-items: center; gap: 0.3rem; width: 100%;">
+                    <div style="width: 100%;">
+                        <div class="explore-hp" id="explore-${i}-hp"></div>
+                        <div class="explore-hp" style="background:#7ed0f0ff;" id="explore-${i}-exp"></div>
+                    </div>
+                    <div class="explore-type-icons">${typeIconsHtml}</div>
+                </div>
                 </div>
 
                 <div class="explore-header-moves" id="explore-team-member-${i}-moves">
 
                 </div>
-
-
 
             </div>
     `
@@ -964,6 +969,9 @@ function updatePreviewTeam(){
             }
 
 
+            const pkmnTypes = pkmn[currentTeam[i].pkmn].type;
+            const typeIconsHtml = pkmnTypes.map(t => `<img class="explore-type-icon" style="background: ${returnTypeColor(t)}" src="img/icons/${t}.svg">`).join('');
+
             div.innerHTML = `
                 <div class="team-member-slotnumber">#0${slotNumber}</div>
                 <div class="team-held-item" id="team-${i}-held-item" data-item="${currentTeam[i].item}">${itemDiv}</div>
@@ -975,7 +983,8 @@ function updatePreviewTeam(){
 
                 <div class="explore-header-infobox">
                 <div class="explore-header-hpbox">
-                <span style="color: white;">${pkmnName}</span>
+                    <span style="color: white;">${pkmnName}</span>
+                    <div class="explore-type-icons" style="margin-left: auto;">${typeIconsHtml}</div>
                 </div>
                 <div class="explore-header-moves" id="explore-team-member-${i}-moves-preview">
                 </div>
