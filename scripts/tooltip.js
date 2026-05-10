@@ -51,6 +51,7 @@ function closeTooltip() {
 
 
 function openTooltip() {
+    if (document.getElementById("tooltipBackground").style.display === "flex") return
     voidAnimation("tooltipBackground", "tooltipBoxAppear 0.2s 1")
     document.getElementById("tooltipBackground").style.display = "flex"
 }

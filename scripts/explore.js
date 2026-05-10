@@ -1742,7 +1742,7 @@ function openMenu() {
     if (today > mysteryGift.duration) document.getElementById(`menu-mystery-gift`).style.display = "none"
 
     if (!saved.claimedExportReward) { document.getElementById(`menu-export-reward`).style.display = "flex" } else document.getElementById(`menu-export-reward`).style.display = "none"
-    if (!saved.wonderTradeClaimed) { document.getElementById(`menu-wonder-trade`).style.display = "flex" } else document.getElementById(`menu-wonder-trade`).style.display = "none"
+    if (areas.vsMasterTrainerGeeta.defeated == true) { document.getElementById(`menu-wonder-trade`).style.display = "flex" } else document.getElementById(`menu-wonder-trade`).style.display = "none"
 
     saved.currentAreaBuffer = undefined
 
@@ -7703,6 +7703,7 @@ saved.lastExportReset ??= Date.now();
 
 let afkSeconds = 0;
 let afkSecondsGenetics = 0;
+let afkSecondsWonderTrade = 0;
 
 function loop() {
     const timeNow = Date.now();
@@ -7710,6 +7711,7 @@ function loop() {
     saved.lastFrameRecorded = timeNow;
 
     afkSecondsGenetics += elapsed;
+    afkSecondsWonderTrade += elapsed;
 
     if (saved.curry && saved.curry.time > -1) {
         saved.curry.time -= elapsed
@@ -8681,7 +8683,6 @@ function resetDailyTimers() {
         saved.lastDailyReset = rotationWildCurrent;
 
         saved.claimedExportReward = false;
-        saved.wonderTradeClaimed = false;
 
     }
 
@@ -9072,6 +9073,30 @@ setInterval(() => {
     }
     document.getElementById("genetics-progress-time").innerHTML = returnHMS(saved.geneticOperation)
     document.getElementById("genetics-progress-bar").style.width = `${100 - (saved.geneticOperation / saved.geneticOperationTotal) * 100}%`;
+}, 1000);
+
+
+
+setInterval(() => {
+    if (saved.wonderTradeOperation == undefined) return
+    if (saved.wonderTradeOperation === 1) {
+        saved.wonderTradeOperation--;
+        if (document.getElementById("tooltipTitle").innerHTML == "Wonder Trade" && document.getElementById("tooltipBackground").style.display == "flex") {
+            claimWonderTrade();
+        }
+    }
+    if (saved.wonderTradeOperation == 0) return
+    if (saved.wonderTradeOperation < 0) saved.wonderTradeOperation = 1
+
+    if (saved.wonderTradeOperation > 1 && afkSecondsWonderTrade > 0) {
+        saved.wonderTradeOperation -= afkSecondsWonderTrade
+        afkSecondsWonderTrade = 0
+    }
+
+    if (document.getElementById("wonder-trade-progress-time")) {
+        document.getElementById("wonder-trade-progress-time").innerHTML = returnHMS(saved.wonderTradeOperation)
+        document.getElementById("wonder-trade-progress-bar").style.width = `${100 - (saved.wonderTradeOperation / saved.wonderTradeOperationTotal) * 100}%`;
+    }
 }, 1000);
 
 
@@ -9885,9 +9910,6 @@ function returnDivisionStars(target, stat) {
 function claimWonderTrade() {
 
 
-    if (saved.wonderTradeClaimed) return
-
-
     if (areas.vsMasterTrainerGeeta.defeated == false) {
         document.getElementById("tooltipTop").style.display = `none`
         document.getElementById("tooltipTitle").style.display = `none`
@@ -9899,6 +9921,9 @@ function claimWonderTrade() {
 
 
     document.getElementById("tooltipTop").style.display = "none"
+    document.getElementById("tooltipTitle").style.display = "inline"
+    document.getElementById("tooltipMid").style.display = "inline"
+    document.getElementById("tooltipBottom").style.display = "inline"
     document.getElementById("tooltipTitle").innerHTML = `Wonder Trade`
 
     let poolInfo = `Pool: 50% New / 50% Duplicate`
@@ -9922,15 +9947,53 @@ function claimWonderTrade() {
         historyHtml += `</div></div>`
     }
 
-    document.getElementById("tooltipMid").innerHTML = `Every 12h you might receive a random pokemon<br><span style="font-size:0.8rem; opacity:0.7">${poolInfo}</span>${historyHtml}`
-    document.getElementById("tooltipBottom").innerHTML = `
-        <div onclick="wonderTrade()" class="standard-button" style="margin-top:0.5rem">Let's do it!</div>
-    `
+    if (saved.wonderTradeOperation === undefined) {
+        document.getElementById("tooltipMid").innerHTML = `Trade a random pokemon from your collection for another random one! Takes 3 hours real time.<br><span style="font-size:0.8rem; opacity:0.7">${poolInfo}</span>${historyHtml}`
+        document.getElementById("tooltipBottom").innerHTML = `
+            <div onclick="startWonderTrade()" class="standard-button" style="margin-top:0.5rem">Let's do it!</div>
+        `
+    } else if (saved.wonderTradeOperation > 1) {
+        document.getElementById("tooltipMid").innerHTML = `
+            Waiting for trade to complete...<br>
+            <div id="wonder-trade-progress" style="display:flex; margin-top:1rem; flex-direction:column; align-items:center; width: 100%;">
+                <div style="width:100%; height:1.5rem; background:var(--dark2); border-radius:0.5rem; overflow:hidden; position:relative; border: 1px solid var(--light1);">
+                    <div id="wonder-trade-progress-bar" style="height:100%; background:lawngreen; width:0%; transition: width 0.5s;"></div>
+                    <div id="wonder-trade-progress-time" style="position:absolute; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; color:white; text-shadow:1px 1px 2px black; font-weight:bold; pointer-events:none; font-size: 0.9rem;"></div>
+                </div>
+            </div>
+            ${historyHtml}
+        `
+        document.getElementById("tooltipBottom").innerHTML = `<div class="standard-button" style="margin-top:0.5rem; opacity:0.5; cursor:not-allowed">In Progress</div>`
+    } else {
+        document.getElementById("tooltipMid").innerHTML = `The trade is complete! What did you get?<br>${historyHtml}`
+        document.getElementById("tooltipBottom").innerHTML = `
+            <div onclick="finishWonderTrade()" class="standard-button" style="margin-top:0.5rem; background:lawngreen; color:black">Finish Trade</div>
+        `
+    }
+
     openTooltip()
 
 }
 
-function wonderTrade() {
+function startWonderTrade() {
+    let playerPokemon = []
+    for (const i in pkmn) {
+        if (pkmn[i].caught > 0) playerPokemon.push(i)
+    }
+
+    if (playerPokemon.length == 0) {
+        return
+    }
+
+    saved.wonderTradeSent = arrayPick(playerPokemon) || "magikarp"
+    saved.wonderTradeOperation = 10800
+    saved.wonderTradeOperationTotal = 10800
+    afkSecondsWonderTrade = 0
+
+    claimWonderTrade()
+}
+
+function finishWonderTrade() {
 
     closeTooltip()
     openMenu()
@@ -9949,7 +10012,7 @@ function wonderTrade() {
         if (pkmn[i].tagObtainedIn == "frontier" || pkmn[i].tagObtainedIn == "wild" || pkmn[i].tagObtainedIn == "park") unobtainedPokemon.push(i)
     }
 
-    let sentPokemon = arrayPick(playerPokemon) || "magikarp"
+    let sentPokemon = saved.wonderTradeSent || "magikarp"
 
     if (rng(0.5) && unobtainedPokemon.length > 0) { //new pokemon
         if (rng(0.15)) chosenShiny = true
@@ -9994,7 +10057,7 @@ function wonderTrade() {
     }
 
 
-    saved.wonderTradeClaimed = true
+    saved.wonderTradeOperation = undefined
 
 
 }
