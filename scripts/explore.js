@@ -1301,7 +1301,13 @@ function leaveCombat(isManual) {
 
     saved.currentArea = undefined
 
-    setWildAreas()
+    if (currentExploreView === "dungeons") {
+        setDungeonAreas()
+    } else if (currentExploreView === "events") {
+        setEventAreas()
+    } else {
+        setWildAreas()
+    }
 
 
 
@@ -4160,6 +4166,7 @@ function setWildAreas() {
         if (currentWildRotation <= 0) currentWildRotation = rotationWildMax
     }
 
+    currentExploreView = "wildAreas"
     document.getElementById("event-banner").style.display = "none"
     document.getElementById("event-banner-category").style.display = "none"
 
@@ -4481,6 +4488,7 @@ function setDungeonAreas() {
 
 
 
+    currentExploreView = "dungeons"
     document.getElementById("event-banner").style.display = "none"
     document.getElementById("event-banner-category").style.display = "none"
 
@@ -4590,6 +4598,7 @@ function setDungeonAreas() {
 
 
 let eventCategory = 1
+let currentExploreView = "wildAreas"
 
 function setEventAreas() {
 
@@ -4625,7 +4634,7 @@ function setEventAreas() {
         return
     }
 
-
+    currentExploreView = "events"
 
     document.getElementById("event-banner").style.display = "flex"
     document.getElementById("event-banner-category").style.display = "flex"
