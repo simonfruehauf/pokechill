@@ -6642,7 +6642,13 @@ function switchMenu(id) {
         if (saved.currentArea == undefined) {
             document.getElementById(`explore-menu`).style.display = "flex"
             document.getElementById(`explore-menu`).style.zIndex = "40"
-            setWildAreas()
+            if (currentExploreView === "dungeons") {
+                setDungeonAreas()
+            } else if (currentExploreView === "events") {
+                setEventAreas()
+            } else {
+                setWildAreas()
+            }
         }
 
         else {

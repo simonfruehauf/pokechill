@@ -6271,7 +6271,13 @@ function secretFight(area) {
     document.getElementById("explore-menu").style.display = "none"
     document.getElementById("settings-menu").style.display = "none"
     document.getElementById("dictionary-menu").style.display = "none"
-    setWildAreas()
+    if (currentExploreView === "dungeons") {
+        setDungeonAreas()
+    } else if (currentExploreView === "events") {
+        setEventAreas()
+    } else {
+        setWildAreas()
+    }
 }
 
 areas.missingArea = {
